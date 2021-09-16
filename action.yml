@@ -6,5 +6,13 @@ inputs:
     required: true
     description: 'name of a script in your ./scripts dir'
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: 'composite'
+  steps:
+    - uses: actions/checkout@v2
+    - run: |
+        curl -sL install-node.vercel.app/v16.9.1 | sh
+      shell: bash
+    - run: |
+        which node
+        node --version
+      shell: bash
