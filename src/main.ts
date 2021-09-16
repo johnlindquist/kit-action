@@ -9,8 +9,8 @@ async function run(): Promise<void> {
     // core.debug(new Date().toTimeString())
 
     // core.setOutput('time', new Date().toTimeString())
-  } catch (error: any) {
-    core.setFailed(error.message)
+  } catch (error) {
+    core.setFailed((error as Error).message)
   }
 }
 
