@@ -5,9 +5,16 @@ inputs:
   script: # change this
     required: true
     description: 'name of a script in your ./scripts dir'
+  who-to-greet: # id of input
+    description: 'Who to greet'
+    required: true
+    default: 'World'
 runs:
   using: 'composite'
   steps:
+    - run: |
+      echo Script: ${{ inputs.script }}.
+      echo Hello ${{ inputs.who-to-greet }}.
     - uses: actions/checkout@v2
     - run: |
         mkdir node
