@@ -6,7 +6,5 @@ inputs:
     required: true
     description: 'name of a script in your ./scripts dir'
 runs:
-  - uses: actions/setup-node@v2
-    with:
-      node-version: '16'
-    main: 'dist/index.js'
+  using: 'docker'
+  image: 'Dockerfile'
