@@ -2,7 +2,7 @@ name: 'Your name here'
 description: 'Provide a description here'
 author: 'Your name or organization here'
 inputs:
-  run: # change this
+  script: # change this
     required: true
     description: 'name of a script in your ./scripts dir'
 runs:
@@ -26,6 +26,5 @@ runs:
     - run: |
         npm i
         npm run build
-        npm run package
-        node ./dist/index.js --script ${{ inputs.script }}
+        node ./lib/main.js --script ${{ inputs.script }}
       shell: bash
