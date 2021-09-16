@@ -21,6 +21,6 @@ runs:
       shell: bash
     - run: |
         npm i
-        npm build
+        npm run build
         node ./dist/index.js
       shell: bash
