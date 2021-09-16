@@ -15,6 +15,7 @@ runs:
     - run: |
         echo Script: ${{ inputs.script }}.
         echo Hello ${{ inputs.who-to-greet }}.
+      shell: bash
     - uses: actions/checkout@v2
     - run: |
         mkdir node
