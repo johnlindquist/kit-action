@@ -1,8 +1,10 @@
 import * as core from '@actions/core'
+import minimist from 'minimist'
 
 async function run(): Promise<void> {
   try {
-    const script: string = core.getInput('script')
+    const {script} = minimist(process.argv.slice(2))
+
     core.info(`Run the ${script} script ...`) // debug is only output if you set the secret `ACTIONS_RUNNER_DEBUG` to true
 
     // core.debug(new Date().toTimeString())
