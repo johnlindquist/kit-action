@@ -27,6 +27,7 @@
   "license": "MIT",
   "dependencies": {
     "@actions/core": "^1.4.0",
+    "@johnlindquist/kit": "^0.1.0-alpha.32",
     "minimist": "^1.2.5"
   },
   "devDependencies": {

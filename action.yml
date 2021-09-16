@@ -2,13 +2,9 @@ name: 'Your name here'
 description: 'Provide a description here'
 author: 'Your name or organization here'
 inputs:
-  script: # change this
+  run: # change this
     required: true
     description: 'name of a script in your ./scripts dir'
-  who-to-greet: # id of input
-    description: 'Who to greet'
-    required: true
-    default: 'World'
 runs:
   using: 'composite'
   steps:
