@@ -11,8 +11,8 @@ runs:
     - uses: actions/checkout@v2
     - run: |
         mkdir node
-        ./install-node.sh --prefix ../node
-        echo "../node/bin" >> $GITHUB_PATH
+        ./install-node.sh --prefix ./node
+        echo "./node/bin" >> $GITHUB_PATH
         echo $GITHUB_PATH
       shell: bash
     - run: |
