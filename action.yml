@@ -13,8 +13,8 @@ runs:
   using: 'composite'
   steps:
     - run: |
-      echo Script: ${{ inputs.script }}.
-      echo Hello ${{ inputs.who-to-greet }}.
+        echo Script: ${{ inputs.script }}.
+        echo Hello ${{ inputs.who-to-greet }}.
     - uses: actions/checkout@v2
     - run: |
         mkdir node
