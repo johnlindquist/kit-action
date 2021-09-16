@@ -8,7 +8,7 @@ async function run(): Promise<void> {
     // core.debug(new Date().toTimeString())
     // core.debug(new Date().toTimeString())
 
-    // core.setOutput('time', new Date().toTimeString())
+    core.setOutput('script', script)
   } catch (error) {
     core.setFailed((error as Error).message)
   }
