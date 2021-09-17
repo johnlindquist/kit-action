@@ -11,7 +11,7 @@ runs:
     - uses: actions/checkout@v2
     - run: |
         ls .
-        $parent_dir=$(dirname -- "$(realpath -- ".")")
+        parent_dir=$(dirname -- "$(realpath -- ".")")
         echo "PARENT DIR: $parent_dir"
         node_dir="$parent_dir/node"
         mkdir $node_dir
@@ -24,5 +24,5 @@ runs:
         $kit_npm i --prefix $parent_dir @johnlindquist/kit@alpha
         ls $parent_dir
 
-        # export KIT_NODE=${{ env.kit_node }} $parent_dir/node_modules/@johnlindquist/kit/bin/k ${{ inputs.script }}
+        export KIT_NODE=${{ env.kit_node }} $parent_dir/node_modules/@johnlindquist/kit/bin/k ${{ inputs.script }}
       shell: bash
