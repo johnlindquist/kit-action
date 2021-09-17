@@ -25,6 +25,5 @@ runs:
       shell: bash
     - run: |
         npm i
-        npm run build
-        node ./lib/main.js --script ${{ inputs.script }}
+        npx kit ${{ inputs.script }}
       shell: bash
