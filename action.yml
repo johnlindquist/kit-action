@@ -39,5 +39,8 @@ runs:
 
         echo "./scripts/${{ inputs.script }}.js"
 
-        # "$KIT/script" "./scripts/${{ inputs.script }}.js"
+        echo "🧁 cat test-script"
+        cat "./scripts/${{ inputs.script }}.js"
+
+        "$KIT/script" "./scripts/${{ inputs.script }}.js"
       shell: bash
