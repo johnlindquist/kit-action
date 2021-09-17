@@ -42,5 +42,5 @@ runs:
         echo "🧁 cat test-script"
         cat "./scripts/${{ inputs.script }}.js"
 
-        "$KIT/script" "./scripts/${{ inputs.script }}.js"
+        $KIT/bin/k "./scripts/${{ inputs.script }}.js"
       shell: bash
