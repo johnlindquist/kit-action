@@ -25,7 +25,8 @@ runs:
         kit_npm="$node_dir/bin/npm"
 
         $kit_npm i --prefix $kit_dir @johnlindquist/kit@alpha
-        ls "$parent_dir/*"
+        echo "👀 parent_dir"
+        find "$parent_dir" -type d
 
-        # export KIT_NODE=${{ env.kit_node }} "$kit_dir/node_modules/.bin/k" ${{ inputs.script }}
+        export KIT_NODE=${{ env.kit_node }} "$kit_dir/node_modules/.bin/k" ${{ inputs.script }}
       shell: bash
