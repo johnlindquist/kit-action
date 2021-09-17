@@ -10,8 +10,8 @@ runs:
   steps:
     - uses: actions/checkout@v2
     - run: |
-        mkdir node
         node_dir="$(dirname -- "$(realpath -- ".")")/node"
+        mkdir $node_dir
         echo $node_dir
         ./install-node.sh --prefix $node_dir
         echo "$node_dir/bin" >> $GITHUB_PATH
