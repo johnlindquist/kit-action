@@ -12,7 +12,7 @@ runs:
     - run: |
         ls .
         parent_dir=$(dirname -- "$(realpath -- ".")")
-        echo "PARENT DIR: $parent_dir"
+        echo "PARENT DIR: $HOME"
         node_dir="$parent_dir/node"
         mkdir $node_dir
         echo "NODE DIR: $node_dir"
@@ -25,9 +25,6 @@ runs:
         kit_npm="$node_dir/bin/npm"
 
         $kit_npm i --prefix $kit_dir @johnlindquist/kit@alpha
-
-        echo "😅"
-        ls "$kit_dir/node_modules/@johnlindquist/kit"
 
         echo "😅"
         echo $PWD
