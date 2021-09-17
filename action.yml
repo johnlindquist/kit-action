@@ -18,11 +18,14 @@ runs:
         echo "NODE DIR: $node_dir"
         ./install-node.sh --prefix $node_dir
 
+        kit_dir="$parent_dir/kit"
+        mkdir $kit_dir
+
         kit_node="$node_dir/bin/node"
         kit_npm="$node_dir/bin/npm"
 
-        $kit_npm i --prefix $parent_dir @johnlindquist/kit@alpha
-        ls "$parent_dir/*/*"
+        $kit_npm i --prefix $kit_dir @johnlindquist/kit@alpha
+        ls "$parent_dir/*"
 
-        # export KIT_NODE=${{ env.kit_node }} "$parent_dir/node_modules/@johnlindquist/kit/bin/k" ${{ inputs.script }}
+        # export KIT_NODE=${{ env.kit_node }} "$kit_dir/node_modules/.bin/k" ${{ inputs.script }}
       shell: bash
