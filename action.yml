@@ -33,5 +33,9 @@ runs:
 
         cat $KIT/script
 
-        "$KIT/script" "./scripts/${{ inputs.script }}.js"
+        echo "${{ inputs.script }}"
+
+        echo "./scripts/${{ inputs.script }}.js"
+
+        # "$KIT/script" "./scripts/${{ inputs.script }}.js"
       shell: bash
