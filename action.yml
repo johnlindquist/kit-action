@@ -33,5 +33,6 @@ runs:
         echo $PWD
 
         export KIT_NODE="$kit_node"        
-        "$kit_dir/node_modules/@johnlindquist/kit/bin/k" "./scripts/${{ inputs.script }}.js"
+        export KIT="$kit_dir/node_modules/@johnlindquist/kit"        
+        "$KIT/bin/k" "./scripts/${{ inputs.script }}.js"
       shell: bash
