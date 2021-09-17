@@ -13,7 +13,7 @@ runs:
     - uses: actions/checkout@v2
     - uses: actions/checkout@v2
       with:
-        repository: "@johnlindquist/kit"
+        repository: "johnlindquist/kit"
         ref: "alpha"
         path: ".kit"
     - run: |
