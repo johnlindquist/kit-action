@@ -33,7 +33,9 @@ runs:
 
         cat $KIT/script
 
-        echo "${{ inputs.script }}"
+        echo "👀"
+
+        echo "INPUTS SCRIPT: ${{ inputs.script }}"
 
         echo "./scripts/${{ inputs.script }}.js"
 
