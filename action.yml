@@ -8,20 +8,22 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: Inject slug/short variables
+      uses: rlespinasse/github-slug-action@v3.x
     - uses: actions/checkout@v2
+    - uses: actions/checkout@v2
+      with:
+        repository: "@johnlindquist/kit"
+        ref: "alpha"
+        path: ".kit"
     - run: |
-        node_dir="$(dirname -- "$(realpath -- ".")")/node"
-        mkdir $node_dir
-        echo $node_dir
-        ./install-node.sh --prefix $node_dir
-        echo "$node_dir/bin" >> $GITHUB_PATH
+        echo ${{ env.GITHUB_REPOSITORY_NAME_PART_SLUG }}
+        ls ./*/*
+        ls ./.kit
+        echo "Workspace: ${{ github.workspace }}""
+        ls "${{ github.workspace }}/.kit"
+        ./.kit/build/build-kit.sh
       shell: bash
     - run: |
-        which node
-        node --version
-      shell: bash
-    - run: |
-        npm i -g @johnlindquist/kit@alpha
-        which kit
-        kit ${{ inputs.script }}
+        ./.kit/bin/k ${{ inputs.script }}
       shell: bash
