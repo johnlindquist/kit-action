@@ -29,6 +29,9 @@ runs:
         echo "😊"      
         echo "$KIT_NODE"
         echo "$KIT"
+        ls ./scripts
 
-        "$KIT/bin/k" "./scripts/${{ inputs.script }}.js"
+        cat $KIT/script
+
+        "$KIT/script" "./scripts/${{ inputs.script }}.js"
       shell: bash
