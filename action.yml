@@ -11,22 +11,18 @@ runs:
     - uses: actions/checkout@v2
     - run: |
         ls ./*
-        node_dir="$(dirname -- "$(realpath -- ".")")/node"
+        $parent_dir=$(dirname -- "$(realpath -- ".")")
+        node_dir="$parent_dir/node"
         mkdir $node_dir
         echo $node_dir
         ./install-node.sh --prefix $node_dir
-        # echo "$node_dir/bin" >> $GITHUB_PATH
-        echo "$kit_node=$node_dir/bin/node" >> $GITHUB_ENV
-        echo "$kit_npm=$node_dir/bin/npm" >> $GITHUB_ENV
 
-      shell: bash
-    - run: |
-        which node
-        node --version
-      shell: bash
-    - run: |
-        npm i -g @johnlindquist/kit@alpha
-        echo "👀 $(which kit)"
-        which kit
-        export KIT_NODE=${{ env.kit_node }} k ${{ inputs.script }}
+        # echo "$node_dir/bin" >> $GITHUB_PATH
+        kit_node=$node_dir/bin/node
+        kit_npm=$node_dir/bin/npm
+
+        $kit_npm i --prefix $parent_dir  @johnlindquist/kit@alpha
+        ls $parent_dir
+
+        export KIT_NODE=${{ env.kit_node }} $parent_dir/node_modules/@johnlindquist/kit/bin/k ${{ inputs.script }}
       shell: bash
