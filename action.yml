@@ -25,12 +25,13 @@ runs:
         kit_npm="$node_dir/bin/npm"
 
         $kit_npm i --prefix $kit_dir @johnlindquist/kit@alpha
-        echo "👀 parent_dir"
-        find "$parent_dir" -type d | grep bin
 
         echo "😅"
-
         ls "$kit_dir/node_modules/@johnlindquist/kit"
 
-        export KIT_NODE=$kit_node "$kit_dir/node_modules/@johnlindquist/kit/bin/k" ${{ inputs.script }}
+        echo "😅"
+        echo $PWD
+
+
+        export KIT_NODE=$kit_node "$kit_dir/node_modules/@johnlindquist/kit/bin/k" "./scripts/${{ inputs.script }}.js"
       shell: bash
