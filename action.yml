@@ -5,6 +5,9 @@ inputs:
   script:
     required: true
     description: "name of a script in your ./scripts dir"
+  args:
+    required: false
+    description: "args to pass to the script"
 runs:
   using: "composite"
   steps:
@@ -42,7 +45,7 @@ runs:
         echo "🧁 cat test-script"
         cat "./scripts/${{ inputs.script }}.js"
 
-        # $KIT/bin/k "./scripts/${{ inputs.script }}.js"
+        $KIT/bin/k "./scripts/${{ inputs.script }}.js ${{ inputs.args }}"
       shell: bash
 
     - name: Setup tmate session
