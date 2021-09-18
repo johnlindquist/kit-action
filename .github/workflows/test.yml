@@ -18,3 +18,4 @@ jobs:
           args: "sweet"
       - run: |
           [ ${{ steps.test-script.outputs.result }} != "sweet" ] && exit 1
+          echo "🎉"
