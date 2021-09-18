@@ -45,8 +45,8 @@ runs:
         echo "🧁 cat test-script"
         cat "./scripts/${{ inputs.script }}.js"
 
-        $KIT/bin/k "./scripts/${{ inputs.script }}.js ${{ inputs.args }}"
+        $KIT/bin/k "scripts/${{ inputs.script }}.js ${{ inputs.args }}"
       shell: bash
 
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
+    # - name: Setup tmate session
+    #   uses: mxschmitt/action-tmate@v3
