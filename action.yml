@@ -29,23 +29,24 @@ runs:
 
         $kit_npm i --prefix $kit_dir @johnlindquist/kit@alpha
 
-        echo "😊"      
-        echo "$KIT_NODE"
-        echo "$KIT"
+        # echo "😊"      
+        # echo "$KIT_NODE"
+        # echo "$KIT"
         ls ./scripts
 
         cat $KIT/script
 
-        echo "👀"
+        # echo "👀"
 
-        echo "INPUTS SCRIPT: ${{ inputs.script }}"
+        # echo "INPUTS SCRIPT: ${{ inputs.script }}"
 
-        echo "./scripts/${{ inputs.script }}.js"
+        # echo "./scripts/${{ inputs.script }}.js"
 
-        echo "🧁 cat test-script"
+        # echo "🧁 cat test-script"
         cat "./scripts/${{ inputs.script }}.js"
 
-        $KIT/bin/k "./scripts/${{ inputs.script }}.js" "${{ inputs.args }}"
+        first_result=$($KIT/bin/k "./scripts/${{ inputs.script }}.js" "${{ inputs.args }}")
+        [ $first_result != ${{ input.args }} ] && exit 1
       shell: bash
 
     # - name: Setup tmate session
