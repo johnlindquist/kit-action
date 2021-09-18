@@ -11,7 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: ./
+      - id: test-script
+        uses: ./
         with:
           script: "test-script"
           args: "sweet"
+      - run: |
+          [ ${{ steps.test-script.outputs.result }} != "sweet" ] && exit 1

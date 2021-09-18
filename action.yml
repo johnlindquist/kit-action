@@ -8,11 +8,17 @@ inputs:
   args:
     required: false
     description: "args to pass to the script"
+outputs:
+  result:
+    description: "result of the script args"
+    value: ${{ steps.script-kit.outputs.result }}
+
 runs:
   using: "composite"
   steps:
     - uses: actions/checkout@v2
-    - run: |
+    - id: script-kit
+      run: |
         node_dir="$HOME/node"
         kit_dir="$HOME/kit"
 
@@ -45,8 +51,8 @@ runs:
         # echo "🧁 cat test-script"
         cat "./scripts/${{ inputs.script }}.js"
 
-        first_result=$($KIT/bin/k "./scripts/${{ inputs.script }}.js" "${{ inputs.args }}")
-        [ $first_result != ${{ input.args }} ] && exit 1
+        result=$($KIT/bin/k "./scripts/${{ inputs.script }}.js" "${{ inputs.args }}")
+        echo "::set-output name=result::$result"
       shell: bash
 
     # - name: Setup tmate session
