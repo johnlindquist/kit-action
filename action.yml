@@ -31,7 +31,9 @@ runs:
         mkdir $node_dir
         mkdir $kit_dir
 
-        ./install-node.sh --prefix $node_dir
+        find $HOME -name "install.sh"
+
+        "$HOME/kit-action/kit-action/install-node.sh" --prefix $node_dir
 
         $kit_npm i --prefix $kit_dir @johnlindquist/kit@alpha
 
