@@ -11,7 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - id: test-script
+      - name: Script Kit run test-script
+        id: test-script
         uses: ./
         with:
           script: "test-script"
