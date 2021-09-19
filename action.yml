@@ -51,7 +51,7 @@ runs:
         # echo "🧁 cat test-script"
         cat "./scripts/${{ inputs.script }}.js"
 
-        result=$($KIT/bin/k "./scripts/${{ inputs.script }}.js" "${{ inputs.args }}")
+        result=$($KIT/bin/k "${{ inputs.script }}" "${{ inputs.args }}")
         echo "::set-output name=result::$result"
       shell: bash
 
