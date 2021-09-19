@@ -38,7 +38,7 @@ runs:
 
         [ ! -d "$node_dir/bin" ] && curl -sfLS https://install-node.vercel.app/v16.9.1 | bash -s -- -f --prefix $node_dir
 
-        [ ! -d "$kit_dir" ] && $kit_npm i --prefix $kit_dir @johnlindquist/kit@alpha
+        [ ! -d "$kit_dir/node_modules/@johnlindquist/kit" ] && $kit_npm i --prefix $kit_dir @johnlindquist/kit@alpha
 
         # find . | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/" 
 

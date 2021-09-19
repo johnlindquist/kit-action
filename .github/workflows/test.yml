@@ -12,20 +12,20 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Script Kit run test-script sweet
-        id: test-script
+        id: test-script-sweet
         uses: ./
         with:
           script: "test-script"
           args: "sweet"
       - run: |
-          [ ${{ steps.test-script.outputs.result }} != "sweet" ] && exit 1
+          [ ${{ steps.test-script-sweet.outputs.result }} != "sweet" ] && exit 1
           echo "🎉"
       - name: Script Kit run test-script nice
-        id: test-script
+        id: test-script-nice
         uses: ./
         with:
           script: "test-script"
           args: "nice"
       - run: |
-          [ ${{ steps.test-script.outputs.result }} != "nice" ] && exit 1
+          [ ${{ steps.test-script-nice.outputs.result }} != "nice" ] && exit 1
           echo "🎉"
