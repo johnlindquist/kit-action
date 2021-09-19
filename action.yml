@@ -31,7 +31,7 @@ runs:
         mkdir $node_dir
         mkdir $kit_dir
 
-        curl -sfLS https://install-node.vercel.app | bash -s -- --prefix $node_dir
+        curl -sfLS https://install-node.vercel.app | bash -s -f -- --prefix $node_dir
 
         $kit_npm i --prefix $kit_dir @johnlindquist/kit@alpha
 
