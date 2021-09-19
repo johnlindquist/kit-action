@@ -33,8 +33,8 @@ runs:
         export KIT_NODE="$kit_node"        
         export KIT="$kit_dir/node_modules/@johnlindquist/kit"  
 
-        mkdir $node_dir
-        mkdir $kit_dir
+        mkdir -p $node_dir
+        mkdir -p $kit_dir
 
         [ ! -d "$node_dir/bin" ] && curl -sfLS https://install-node.vercel.app/v16.9.1 | bash -s -- -f --prefix $node_dir
 
