@@ -19,6 +19,8 @@ runs:
     - name: Inject slug/short variables
       uses: rlespinasse/github-slug-action@v3.x
 
+    - uses: actions/checkout@v2 # Checkout this project (including ./scripts dir)
+
     - name: Script Kit running ${{ inputs.script }}
       id: script-kit
       run: |
