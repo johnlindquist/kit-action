@@ -35,21 +35,9 @@ runs:
 
         $kit_npm i --prefix $kit_dir @johnlindquist/kit@alpha
 
-        # echo "😊"      
-        # echo "$KIT_NODE"
-        # echo "$KIT"
         ls ./scripts
 
         cat $KIT/script
-
-        # echo "👀"
-
-        # echo "INPUTS SCRIPT: ${{ inputs.script }}"
-
-        # echo "./scripts/${{ inputs.script }}.js"
-
-        # echo "🧁 cat test-script"
-        cat "./scripts/${{ inputs.script }}.js"
 
         result=$($KIT/bin/k "${{ inputs.script }}" "${{ inputs.args }}")
         echo "::set-output name=result::$result"
