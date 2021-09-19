@@ -35,8 +35,6 @@ runs:
 
         $kit_npm i --prefix $kit_dir @johnlindquist/kit@alpha
 
-        ls ./scripts
-
         cat $KIT/script
 
         result=$($KIT/bin/k "${{ inputs.script }}" "${{ inputs.args }}")
