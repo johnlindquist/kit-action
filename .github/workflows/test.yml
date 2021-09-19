@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Script Kit run test-script
+      - name: Script Kit run test-script sweet
         id: test-script
         uses: ./
         with:
@@ -19,4 +19,13 @@ jobs:
           args: "sweet"
       - run: |
           [ ${{ steps.test-script.outputs.result }} != "sweet" ] && exit 1
+          echo "🎉"
+      - name: Script Kit run test-script nice
+        id: test-script
+        uses: ./
+        with:
+          script: "test-script"
+          args: "nice"
+      - run: |
+          [ ${{ steps.test-script.outputs.result }} != "nice" ] && exit 1
           echo "🎉"
