@@ -44,6 +44,7 @@ runs:
 
         [ ! -d "$kit_dir/node_modules/@johnlindquist/kit" ] && $kit_npm i --prefix $kit_dir @johnlindquist/kit@alpha
 
+        echo $PATH
         node --version
 
         # find . | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/" 
