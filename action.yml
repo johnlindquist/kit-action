@@ -31,7 +31,6 @@ runs:
         kit_npm="$node_dir/bin/npm"
         echo "$node_dir" >> $GITHUB_PATH
 
-        node --version
 
         export KIT_NODE="$kit_node"        
         export KIT="$kit_dir/node_modules/@johnlindquist/kit"  
@@ -44,6 +43,8 @@ runs:
         [ ! -d "$node_dir/bin" ] && curl -sfLS https://install-node.vercel.app/v16.9.1 | bash -s -- -f --prefix $node_dir
 
         [ ! -d "$kit_dir/node_modules/@johnlindquist/kit" ] && $kit_npm i --prefix $kit_dir @johnlindquist/kit@alpha
+
+        node --version
 
         # find . | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/" 
 
