@@ -52,14 +52,13 @@ runs:
 
         # find . | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/" 
 
-        project_dir="$HOME/work/${{ env.GITHUB_REPOSITORY_NAME_PART }}/${{ env.GITHUB_REPOSITORY_NAME_PART }}"
+        export KENV="$HOME/work/${{ env.GITHUB_REPOSITORY_NAME_PART }}/${{ env.GITHUB_REPOSITORY_NAME_PART }}"
 
         # echo "👀 PROJECT DIR: $project_dir"
-        cd $project_dir
+        cd $KENV
 
         # find $project_dir | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/" 
-
-        result=$($KIT/bin/k "${{ inputs.script }}" "${{ inputs.args }}")
+        result=$($KIT/bin/kit "${{ inputs.script }}" "${{ inputs.args }}")
         echo "::set-output name=result::$result"
       shell: bash
 
