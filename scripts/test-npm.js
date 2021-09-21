@@ -1,4 +1,5 @@
 console.log(`👀 BEFORE NPM`)
+console.log(`☝️ ${kenvPath()}`)
 
 let { context } = await npm("@actions/github")
 
