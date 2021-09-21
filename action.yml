@@ -29,9 +29,14 @@ runs:
 
         kit_node="$node_dir/bin/node"
         kit_npm="$node_dir/bin/npm"
+        echo "$node_dir" >> $GITHUB_PATH
+
+        node --version
 
         export KIT_NODE="$kit_node"        
         export KIT="$kit_dir/node_modules/@johnlindquist/kit"  
+
+
 
         mkdir -p $node_dir
         mkdir -p $kit_dir
