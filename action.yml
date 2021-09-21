@@ -21,22 +21,23 @@ runs:
 
     - uses: actions/checkout@v2 # Checkout this project (including ./scripts dir)
 
+    - name: Add node to PATH
+      run: |
+        echo "$HOME/node/bin" >> $GITHUB_PATH
+
     - name: Script Kit running ${{ inputs.script }}
       id: script-kit
       run: |
-        echo 'export node_dir="$HOME/node"' >> ./kit-config.sh
-        echo 'export kit_dir="$HOME/kit"' >> ./kit-config.sh
+        node_dir="$HOME/node"
+        kit_dir="$HOME/kit"
 
-        echo 'export node_bin="$node_dir/bin"' >> ./kit-config.sh
-        echo 'export kit_node="$node_bin/node"' >> ./kit-config.sh
-        echo 'export kit_npm="$node_bin/npm"' >> ./kit-config.sh
-        echo 'echo "$node_bin" >> $GITHUB_PATH' >> ./kit-config.sh
+        kit_node="$node_dir/bin/node"
+        kit_npm="$node_dir/bin/npm"
 
-        echo 'export KIT_NODE="$kit_node"' >> ./kit-config.sh'       
-        echo 'export KIT="$kit_dir/node_modules/@johnlindquist/kit"' >> ./kit-config.sh' 
+        export KIT_NODE="$kit_node"        
+        export KIT="$kit_dir/node_modules/@johnlindquist/kit"  
 
-        chmod +x ./kit-config.sh
-        source ./kit-config.sh
+
 
         mkdir -p $node_dir
         mkdir -p $kit_dir
