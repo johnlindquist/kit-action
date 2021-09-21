@@ -31,8 +31,8 @@ jobs:
           [ ${{ steps.test-script-nice.outputs.result }} != "nice" ] && exit 1
           echo "🎉"
 
-      - name: Script Kit run test-script nice
-        id: test-script-nice
+      - name: Script Kit test npm
+        id: test-npm
         uses: ./
         with:
           script: "test-npm"
