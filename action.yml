@@ -63,6 +63,7 @@ runs:
 
 
         # find $project_dir | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/" 
+        export KIT_NODE_PATH="$HOME/node/bin"
         result=$($KIT/bin/k "${{ inputs.script }}" "${{ inputs.args }}")
         echo "::set-output name=result::$result"
       shell: bash
