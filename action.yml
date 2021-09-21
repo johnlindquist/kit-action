@@ -51,11 +51,15 @@ runs:
         # node --version
 
         # find . | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/" 
-
-        export KENV="$HOME/work/${{ env.GITHUB_REPOSITORY_NAME_PART }}/${{ env.GITHUB_REPOSITORY_NAME_PART }}"
-
-        # echo "👀 PROJECT DIR: $KENV"
+        export KENV=$HOME
         cd $KENV
+        echo '{"name":"kit-action","type":"module", "dependencies": {}}' >> package.json
+
+        export project_dir="$HOME/work/${{ env.GITHUB_REPOSITORY_NAME_PART }}/${{ env.GITHUB_REPOSITORY_NAME_PART }}"
+        # echo "👀 PROJECT DIR: $project_dir"
+        cd $project_dir
+
+
 
         # find $project_dir | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/" 
         result=$($KIT/bin/k "${{ inputs.script }}" "${{ inputs.args }}")
