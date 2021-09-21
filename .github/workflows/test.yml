@@ -36,3 +36,6 @@ jobs:
         uses: ./
         with:
           script: "test-npm"
+      - run: |
+          ls "$HOME/node_modules"
+          cat "$HOME/package.json"
