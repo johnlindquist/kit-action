@@ -23,12 +23,12 @@ runs:
 
     - name: Script Kit Config
       run: |
-        node_dir="$HOME/node"
-        kit_dir="$HOME/kit"
+        export node_dir="$HOME/node"
+        export kit_dir="$HOME/kit"
 
-        node_bin="$node_dir/bin"
-        kit_node="$node_bin/node"
-        kit_npm="$node_bin/npm"
+        export node_bin="$node_dir/bin"
+        export kit_node="$node_bin/node"
+        export kit_npm="$node_bin/npm"
         echo "$node_bin" >> $GITHUB_PATH
 
 
