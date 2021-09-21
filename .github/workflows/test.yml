@@ -37,5 +37,7 @@ jobs:
         with:
           script: "test-npm"
       - run: |
-          ls "$HOME/node_modules"
+          echo "ls home"
+          ls "$HOME"
+          echo "cat package.json"
           cat "$HOME/package.json"

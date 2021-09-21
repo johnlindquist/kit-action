@@ -54,6 +54,7 @@ runs:
         export KENV=$HOME
         cd $KENV
         echo '{"name":"kit-action","type":"module", "dependencies": {}}' >> package.json
+        npm i @actions/github
 
         export project_dir="$HOME/work/${{ env.GITHUB_REPOSITORY_NAME_PART }}/${{ env.GITHUB_REPOSITORY_NAME_PART }}"
         # echo "👀 PROJECT DIR: $project_dir"
