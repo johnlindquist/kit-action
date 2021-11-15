@@ -53,9 +53,10 @@ runs:
 
         export KENV="$HOME/work/${{ env.GITHUB_REPOSITORY_NAME_PART }}/${{ env.GITHUB_REPOSITORY_NAME_PART }}"
         cd $KENV
+        $kit_npm i
 
         # find $project_dir | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/" 
-        export KIT_NODE_PATH="$HOME/node/bin"
+        export KIT_NODE_PATH="$HOME/node/bin"        
         result=$($KIT/bin/k "${{ inputs.script }}" "${{ inputs.args }}" --trust)
         echo "::set-output name=result::$result"
       shell: bash
