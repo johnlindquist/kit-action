@@ -63,6 +63,7 @@ runs:
         export KIT_NODE_PATH="$HOME/.kit/node/bin"        
         echo "🏃‍♀️ Running ${{ inputs.script}} with ${{ inputs.args }}"
         result=$($KIT/bin/k "${{ inputs.script }}" "${{ inputs.args }}" --trust)
+        echo $result
         echo "::set-output name=result::$result"
       shell: bash
 
