@@ -44,7 +44,7 @@ runs:
 
         [ ! -d "$node_dir/bin" ] && curl -sfLS https://install-node.vercel.app/v17.1.0 | bash -s -- -f --prefix $node_dir
         $kit_npm i --prefix $kit_dir @johnlindquist/kit@beta
-        $kit_npm i --prefix $kit_dir -D @actions/github
+        $kit_npm i --prefix $kit_dir @actions/github
 
         # echo $PATH
         $kit_node --version
@@ -53,10 +53,11 @@ runs:
 
         export KENV="$HOME/work/${{ env.GITHUB_REPOSITORY_NAME_PART }}/${{ env.GITHUB_REPOSITORY_NAME_PART }}"
         cd $KENV
-        $kit_npm i
+        $kit_npm init -y
+        $kit_npm i --prefix $kit_dir
 
         # find $project_dir | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/" 
-        export KIT_NODE_PATH="$HOME/node/bin"        
+        export KIT_NODE_PATH="$HOME/.kit/node/bin"        
         result=$($KIT/bin/k "${{ inputs.script }}" "${{ inputs.args }}" --trust)
         echo "::set-output name=result::$result"
       shell: bash
