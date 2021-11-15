@@ -56,6 +56,8 @@ runs:
         $kit_npm init -y
         $kit_npm i
         mkdir -p "$KENV/node_modules"
+        echo "ls KENV"
+        ls $KENV
         
         # find $project_dir | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/" 
         export KIT_NODE_PATH="$HOME/.kit/node/bin"        
@@ -64,5 +66,5 @@ runs:
         echo "::set-output name=result::$result"
       shell: bash
 
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
+#     - name: Setup tmate session
+#       uses: mxschmitt/action-tmate@v3
