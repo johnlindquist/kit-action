@@ -58,6 +58,8 @@ runs:
 
         export project_dir="$HOME/work/${{ env.GITHUB_REPOSITORY_NAME_PART }}/${{ env.GITHUB_REPOSITORY_NAME_PART }}"
         echo "👀 PROJECT DIR: $project_dir"
+        ls "$project_dir"
+        ls "$project_dir/scripts"
         cd $project_dir
 
 
