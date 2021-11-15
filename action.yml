@@ -43,12 +43,12 @@ runs:
         mkdir -p $node_dir
         mkdir -p $kit_dir
 
-        [ ! -d "$node_dir/bin" ] && curl -sfLS https://install-node.vercel.app/v16.9.1 | bash -s -- -f --prefix $node_dir
+        [ ! -d "$node_dir/bin" ] && curl -sfLS https://install-node.vercel.app/v17.1.0 | bash -s -- -f --prefix $node_dir
 
-        [ ! -d "$kit_dir/node_modules/@johnlindquist/kit" ] && $kit_npm i --prefix $kit_dir @johnlindquist/kit@alpha
+        [ ! -d "$kit_dir/node_modules/@johnlindquist/kit" ] && $kit_npm i --prefix $kit_dir @johnlindquist/kit@beta
 
         # echo $PATH
-        # node --version
+        node --version
 
         # find . | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/" 
         export KENV=$HOME
