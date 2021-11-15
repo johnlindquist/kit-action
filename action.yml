@@ -58,7 +58,7 @@ runs:
         
         # find $project_dir | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/" 
         export KIT_NODE_PATH="$HOME/.kit/node/bin"        
-        echo "Running ${{ inputs.script}} with ${{ inputs.args }}"
+        echo "🏃‍♀️ Running ${{ inputs.script}} with ${{ inputs.args }}"
         result=$(k "${{ inputs.script }}" "${{ inputs.args }}" --trust)
         echo "::set-output name=result::$result"
       shell: bash
