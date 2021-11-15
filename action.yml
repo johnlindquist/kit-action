@@ -21,7 +21,7 @@ runs:
 
     - uses: actions/checkout@v2 # Checkout this project (including ./scripts dir)
 
-    - name: Add node to PATH
+    - name: Add node and ./kit/bin to PATH
       run: |
         echo "$HOME/.kit/node/bin:$HOME/.kit/bin" >> $GITHUB_PATH
       shell: bash
@@ -55,10 +55,11 @@ runs:
         cd $KENV
         $kit_npm init -y
         $kit_npm i --prefix $kit_dir
-
+        
         # find $project_dir | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/" 
         export KIT_NODE_PATH="$HOME/.kit/node/bin"        
-        result=$($KIT/bin/k "${{ inputs.script }}" "${{ inputs.args }}" --trust)
+        echo "Running ${{ inputs.script}} with ${{ inputs.args }}"
+        result=$(k "${{ inputs.script }}" "${{ inputs.args }}" --trust)
         echo "::set-output name=result::$result"
       shell: bash
 
