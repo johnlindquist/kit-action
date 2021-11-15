@@ -39,6 +39,6 @@ jobs:
           script: "test-npm"
       - run: |
           echo "ls home"
-          ls "$HOME"
+          ls "$KIT"
           echo "cat package.json"
-          cat "$HOME/package.json"
+          cat "$KIT/package.json"
