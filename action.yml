@@ -45,16 +45,16 @@ runs:
 
         [ ! -d "$node_dir/bin" ] && curl -sfLS https://install-node.vercel.app/v17.1.0 | bash -s -- -f --prefix $node_dir
 
-        [ ! -d "$kit_dir/node_modules/@johnlindquist/kit" ] && $kit_npm i --prefix $kit_dir @johnlindquist/kit@beta
+        $kit_npm i --prefix $kit_dir @johnlindquist/kit@beta
 
         # echo $PATH
-        node --version
+        $kit_node --version
 
         # find . | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/" 
         export KENV=$HOME
         cd $KENV
-        npm init -y
-        npm i @actions/github
+        $kit_npm init -y
+        $kit_npm i --prefix $kit_dir -D @actions/github
 
         export project_dir="$HOME/work/${{ env.GITHUB_REPOSITORY_NAME_PART }}/${{ env.GITHUB_REPOSITORY_NAME_PART }}"
         # echo "👀 PROJECT DIR: $project_dir"
