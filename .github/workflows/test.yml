@@ -39,6 +39,6 @@ jobs:
           script: "test-npm"
       - run: |
           echo "ls home"
-          ls "$KIT"
+          ls "$HOME/.kit/node_modules"
           echo "cat package.json"
-          cat "$KIT/package.json"
+          cat "$HOME/.kit/package.json"
