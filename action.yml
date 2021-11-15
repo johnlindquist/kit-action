@@ -56,7 +56,7 @@ runs:
         $kit_npm init -y
         $kit_npm i -D @johnlindquist/kit@beta
         mkdir -p "$KENV/node_modules"
-        echo "ls KENV"
+
         
         # find $project_dir | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/" 
         export KIT_NODE_PATH="$HOME/.kit/node/bin"        
