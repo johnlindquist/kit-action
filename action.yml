@@ -29,8 +29,9 @@ runs:
     - name: Script Kit running ${{ inputs.script }}
       id: script-kit
       run: |
-        node_dir="$HOME/node"
-        kit_dir="$HOME/kit"
+        kit_dir="$HOME/.kit"
+        node_dir="$HOME/.kit/node"
+
 
         kit_node="$node_dir/bin/node"
         kit_npm="$node_dir/bin/npm"
@@ -42,9 +43,8 @@ runs:
         mkdir -p $kit_dir
 
         [ ! -d "$node_dir/bin" ] && curl -sfLS https://install-node.vercel.app/v17.1.0 | bash -s -- -f --prefix $node_dir
-
         $kit_npm i --prefix $kit_dir @johnlindquist/kit@beta
-         $kit_npm i --prefix $kit_dir -D @actions/github
+        $kit_npm i --prefix $kit_dir -D @actions/github
 
         # echo $PATH
         $kit_node --version
