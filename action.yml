@@ -54,10 +54,9 @@ runs:
         export KENV="$HOME/work/${{ env.GITHUB_REPOSITORY_NAME_PART }}/${{ env.GITHUB_REPOSITORY_NAME_PART }}"
         cd $KENV
         $kit_npm init -y
-        $kit_npm i
+        $kit_npm i -D @johnlindquist/kit
         mkdir -p "$KENV/node_modules"
         echo "ls KENV"
-        ls $KENV
         
         # find $project_dir | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/" 
         export KIT_NODE_PATH="$HOME/.kit/node/bin"        
