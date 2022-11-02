@@ -23,7 +23,7 @@ jobs:
           args: "sweet"
       - run: |
           echo ${{ steps.test-script-sweet.outputs.sweet }} 
-          [ ${{ steps.test-script-sweet.outputs.sweet }} != "sweet" ] && exit 1
+          [ ${{ steps.test-script-sweet.outputs.sweet }} != "fail" ] && exit 1
           echo "🎉"
 
       - name: Script Kit run test-script nice
