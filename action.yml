@@ -57,7 +57,7 @@ runs:
 
         exit_status="$?"
         echo "Exit status $exit_status"
-        [[ $exit_status != 0 ]] exit
+        [[ $exit_status != 0 ]] && exit
 
         echo "console.log output:"
         echo $result
