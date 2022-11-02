@@ -73,6 +73,7 @@ runs:
       uses: actions/github-script@v6
       with:
         script: |
+          console.log(`😢 Failed due to Error in result string`)
           core.setFailed('${{ steps.test-get.outputs.result }}')
 
 #     - name: Setup tmate session
