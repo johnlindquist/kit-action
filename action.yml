@@ -59,8 +59,8 @@ runs:
         echo "Exit code: $exit_status"
         [[ $exit_status != 0 ]] && exit
 
-        # Remove newlines and curly braces from result
-        result=$(echo $result | tr -d '\n' | tr -d '{}')
+        # Only get the last line of result and trim whitespace
+        result=$(echo "$result" | tail -n 1 | xargs)
 
         echo "console.log output:"
         echo $result
