@@ -15,8 +15,6 @@ outputs:
 
 runs:
   using: "composite"
-  outputs:
-    result: ${{ steps.script-kit.outputs.result }}
   steps:
     - name: Inject slug/short variables
       uses: rlespinasse/github-slug-action@v3.x
