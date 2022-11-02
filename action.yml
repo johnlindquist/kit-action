@@ -19,7 +19,7 @@ runs:
     - name: Inject slug/short variables
       uses: rlespinasse/github-slug-action@v3.x
 
-    - uses: actions/checkout@v2 # Checkout this project (including ./scripts dir)
+    - uses: actions/checkout@v3 # Checkout this project (including ./scripts dir)
 
     - name: Add node and ./kit/bin to PATH
       run: |
