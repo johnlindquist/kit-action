@@ -69,7 +69,7 @@ runs:
       shell: bash
 
     - name: Check Result for Error
-      if: ${{ steps.test-get.outputs.result }} = *Error*
+      if: ${{ steps.script-kit.outputs.result }} = *Error*
       uses: actions/github-script@v3
       with:
         script: |
