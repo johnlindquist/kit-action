@@ -47,7 +47,7 @@ jobs:
         id: test-get
         uses: ./
         with:
-          script: "scripts/test-get.sj"
+          script: "scripts/test-get.js"
       - run: |
           [ ${{ steps.test-get.outputs.result }} != "johnlindquist/kit" ] && exit 1
           [ ${{ steps.test-get.outputs.result }} = "johnlindquist/kit" ] && echo "Passed 🎉"
