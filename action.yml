@@ -57,7 +57,7 @@ runs:
         result=$($kit_node $KIT/run/github-workflow.js "${{ inputs.script }}" "${{ inputs.args }}" --trust && [[ $? != 0 ]] && exit | tr '\n' ' ')
         echo "Exit status $? $($?)"
         [[ $? != 0 ]] exit 1
-        echo "Assigning console.log to result:"
+        echo "console.log output:"
         echo $result
         echo "result=$result" >> $GITHUB_OUTPUT
       shell: bash
