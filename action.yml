@@ -72,7 +72,7 @@ runs:
       with:
         script: |
           console.log(`Testing...`)
-          console.log(`steps.script-kit.outputs.result`)
+          console.log(`$steps.script-kit.outputs.result`)
 
 # if(`${{ steps.script-kit.outputs.result }}`.includes('Error')){
 #   console.log(`😢 Failed due to Error in result string`)
