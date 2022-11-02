@@ -62,7 +62,7 @@ runs:
 
         echo "console.log output:"
         echo $result
-        echo "result=$result" >> $GITHUB_OUTPUT
+        echo "result=${{ toJSON(result) }}" >> $GITHUB_OUTPUT
       shell: bash
 
     # - name: Check Result for Error
