@@ -16,7 +16,7 @@ jobs:
         id: test-script-sweet
         uses: ./
         with:
-          script: "test-script"
+          script: "scripts/test-script.js"
           args: "sweet"
       - run: |
           [ ${{ steps.test-script-sweet.outputs.result }} != "sweet" ] && exit 1
@@ -26,7 +26,7 @@ jobs:
         id: test-script-nice
         uses: ./
         with:
-          script: "test-script"
+          script: "scripts/test-script.js"
           args: "nice"
       - run: |
           [ ${{ steps.test-script-nice.outputs.result }} != "nice" ] && exit 1
@@ -36,7 +36,7 @@ jobs:
         id: test-npm
         uses: ./
         with:
-          script: "test-npm"
+          script: "scripts/test-npm.js"
       - run: |
           echo "ls home"
           ls "$HOME/.kit/node_modules"
@@ -47,7 +47,7 @@ jobs:
         id: test-get
         uses: ./
         with:
-          script: "test-get"
+          script: "scripts/test-get.sj"
       - run: |
           [ ${{ steps.test-get.outputs.result }} != "johnlindquist/kit" ] && exit 1
           [ ${{ steps.test-get.outputs.result }} = "johnlindquist/kit" ] && echo "Passed 🎉"
@@ -56,4 +56,4 @@ jobs:
         id: test-error
         uses: ./
         with:
-          script: "test-error"
+          script: "scripts/test-error.js"
