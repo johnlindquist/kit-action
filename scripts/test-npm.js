@@ -1,2 +1,6 @@
+let core = await npm("@actions/core")
+
 let { titleCase } = await npm("title-case")
-console.log(titleCase(await arg("Enter a string to title case:")))
+let result = titleCase(await arg("Enter a string to title case:"))
+
+core.setOutput("result", result)

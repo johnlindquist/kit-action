@@ -53,18 +53,11 @@ runs:
 
         echo "🏃‍♀️ Running ${{ inputs.script}} with ${{ inputs.args }}"
 
-        result=$($kit_node $KIT/run/github-workflow.js "${{ inputs.script }}" "${{ inputs.args }}" --trust)      
+        $kit_node $KIT/run/github-workflow.js "${{ inputs.script }}" "${{ inputs.args }}" --trust
 
         exit_status="$?"
         echo "Exit code: $exit_status"
         [[ $exit_status != 0 ]] && exit
-
-        # Only get the last line of result and trim whitespace
-        result=$(echo "$result" | tail -n 1 | xargs)
-
-        echo "console.log output:"
-        echo $result
-        echo "result=$result" >> $GITHUB_OUTPUT
       shell: bash
 
     # - name: Check Result for Error

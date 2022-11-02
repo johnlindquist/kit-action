@@ -1,2 +1,3 @@
+let core = await npm("@actions/core")
 let value = await arg("hello")
-console.log(value)
+core.setOutput("result", value)
