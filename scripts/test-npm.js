@@ -1,3 +1,5 @@
+import "@johnlindquist/kit"
+
 console.log(`👀 BEFORE NPM`)
 console.log(`☝️ ${kenvPath()}`)
 await $`which npm`
