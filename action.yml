@@ -30,7 +30,7 @@ runs:
       id: script-kit
       run: |
         kit_dir="$HOME/.kit"
-        node_dir="$HOME/.kit/node"
+        node_dir="$HOME/.knode"
 
 
         kit_node="$node_dir/bin/node"
@@ -42,8 +42,8 @@ runs:
         mkdir -p $node_dir
         mkdir -p $kit_dir
 
-        [ ! -d "$node_dir/bin" ] && curl -sfLS https://install-node.vercel.app/v17.1.0 | bash -s -- -f --prefix $node_dir
-        $kit_npm i --prefix $kit_dir @johnlindquist/kit@beta
+        [ ! -d "$node_dir/bin" ] && curl -sfLS https://install-node.vercel.app/v16.14.2 | bash -s -- -f --prefix $node_dir
+        $kit_npm i --prefix $kit_dir @johnlindquist/kit
         $kit_npm i --prefix $kit_dir @actions/github
 
         # echo $PATH
@@ -54,10 +54,10 @@ runs:
         export KENV="$HOME/work/${{ env.GITHUB_REPOSITORY_NAME_PART }}/${{ env.GITHUB_REPOSITORY_NAME_PART }}"
         cd $KENV
         $kit_npm init -y
-        $kit_npm i -D @johnlindquist/kit@beta
+        $kit_npm i -D @johnlindquist/kit
         mkdir -p "$KENV/node_modules"
 
-        
+
         # find $project_dir | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/" 
         export KIT_NODE_PATH="$HOME/.kit/node/bin"        
         echo "🏃‍♀️ Running ${{ inputs.script}} with ${{ inputs.args }}"
@@ -65,6 +65,5 @@ runs:
         echo $result
         echo "::set-output name=result::$result"
       shell: bash
-
 #     - name: Setup tmate session
 #       uses: mxschmitt/action-tmate@v3
