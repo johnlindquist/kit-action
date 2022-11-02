@@ -54,8 +54,7 @@ runs:
         mkdir -p "$KENV/node_modules"
 
         echo "🏃‍♀️ Running ${{ inputs.script}} with ${{ inputs.args }}"
-        result=$($kit_node $KIT/run/github-workflow.js "${{ inputs.script }}" "${{ inputs.args }}" --trust | tr '\n' ' ')
-        [[ $? != 0 ]] && exit 1;
+        result=$($kit_node $KIT/run/github-workflow.js "${{ inputs.script }}" "${{ inputs.args }}" --trust && [[ $? != 0 ]] && exit 1 | tr '\n' ' ')       
 
         echo "Assigning console.log to result:"
         echo $result
