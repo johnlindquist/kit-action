@@ -42,3 +42,12 @@ jobs:
           ls "$HOME/.kit/node_modules"
           echo "cat package.json"
           cat "$HOME/.kit/package.json"
+
+      - name: Script Kit get
+        id: test-get
+        uses: ./
+        with:
+          script: "test-get"
+      - run: |
+          [ ${{ steps.test-script-nice.outputs.result }} != "johnlindquist/kit" ] && exit 1
+          [ ${{ steps.test-script-nice.outputs.result }} = "johnlindquist/kit" ] && echo "Passed 🎉"
