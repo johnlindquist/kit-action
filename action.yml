@@ -59,13 +59,8 @@ runs:
         echo "Exit code: $exit_status"
         [[ $exit_status != 0 ]] && exit
 
-        # Remove all newlines from result
-        result=$(echo "$result" | tr -d ')
-        # Remove all quotes from result
-        result=$(echo "$result" | tr -d '"')
-        # Remove all curly braces from result
-        result=$(echo "$result" | tr -d '{')
-        result=$(echo "$result" | tr -d '}')
+        # Remove newlines and curly braces from result
+        result=$(echo $result | tr -d '\n' | tr -d '{}')
 
         echo "console.log output:"
         echo $result
