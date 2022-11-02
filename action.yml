@@ -29,6 +29,7 @@ runs:
     - name: Script Kit running ${{ inputs.script }}
       id: script-kit
       run: |
+        set -e
         kit_dir="$HOME/.kit"
         node_dir="$HOME/.knode"
 
@@ -55,7 +56,7 @@ runs:
         echo "🏃‍♀️ Running ${{ inputs.script}} with ${{ inputs.args }}"
         result=$(NODE_OPTIONS='--trace-exit' $kit_node $KIT/run/github-workflow.js "${{ inputs.script }}" "${{ inputs.args }}" --trust | tr '\n' ' ')
 
-        echo "Assining console.log to result:"
+        echo "Assigning console.log to result:"
         echo $result
         echo "result=$result" >> $GITHUB_OUTPUT
       shell: bash
