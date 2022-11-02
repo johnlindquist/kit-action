@@ -71,7 +71,7 @@ runs:
       uses: actions/github-script@v6
       with:
         script: |
-          if('${{ steps.script-kit.outputs.result }}'.includes('Error')){
+          if(`${{ steps.script-kit.outputs.result }}`.includes('Error')){
             console.log(`😢 Failed due to Error in result string`)
             core.setFailed('${{ steps.test-get.outputs.result }}')
           }
