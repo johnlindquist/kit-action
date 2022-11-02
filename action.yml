@@ -67,5 +67,13 @@ runs:
         echo $result
         echo "result=$result" >> $GITHUB_OUTPUT
       shell: bash
+
+    - name: Check Result for Error
+      if: ${{ steps.test-get.outputs.result }} = *Error*
+      uses: actions/github-script@v3
+      with:
+        script: |
+          core.setFailed('${{ steps.test-get.outputs.result }}')
+
 #     - name: Setup tmate session
 #       uses: mxschmitt/action-tmate@v3
