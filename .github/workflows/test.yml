@@ -18,7 +18,7 @@ jobs:
         with:
           script: "test-script"
           args: "sweet"
-      - run: |
+        run: |
           [ ${{ steps.test-script-sweet.outputs.result }} != "sweet" ] && exit 1
           echo "🎉"
 
@@ -28,7 +28,7 @@ jobs:
         with:
           script: "test-script"
           args: "nice"
-      - run: |
+        run: |
           [ ${{ steps.test-script-nice.outputs.result }} != "nice" ] && exit 1
           echo "🎉"
 
@@ -37,7 +37,7 @@ jobs:
         uses: ./
         with:
           script: "test-npm"
-      - run: |
+        run: |
           echo "ls home"
           ls "$HOME/.kit/node_modules"
           echo "cat package.json"
