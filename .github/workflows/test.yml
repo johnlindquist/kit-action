@@ -14,7 +14,6 @@ jobs:
       - uses: actions/checkout@v2
       - name: Script Kit run test-script sweet
         id: test-script-sweet
-        uses: ./
         with:
           script: "test-script"
           args: "sweet"
@@ -24,7 +23,6 @@ jobs:
 
       - name: Script Kit run test-script nice
         id: test-script-nice
-        uses: ./
         with:
           script: "test-script"
           args: "nice"
@@ -34,7 +32,6 @@ jobs:
 
       - name: Script Kit test npm
         id: test-npm
-        uses: ./
         with:
           script: "test-npm"
         run: |
