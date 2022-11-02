@@ -53,7 +53,8 @@ runs:
         mkdir -p "$KENV/node_modules"
 
         echo "🏃‍♀️ Running ${{ inputs.script}} with ${{ inputs.args }}"
-        result=$($kit_node $KIT/run/github-workflow.js "${{ inputs.script }}" "${{ inputs.args }}" --trust | tr '\n' ' ')
+        # result=$($kit_node $KIT/run/github-workflow.js "${{ inputs.script }}" "${{ inputs.args }}" --trust | tr '\n' ' ')
+        result=$($kit_node $KIT/run/github-workflow.js "${{ inputs.script }}" "${{ inputs.args }}" --trust)
 
         exit_status="$?"
         echo "Exit code: $exit_status"
