@@ -22,6 +22,7 @@ jobs:
           script: "test-script"
           args: "sweet"
       - run: |
+          echo ${{ steps.test-script-sweet.outputs.sweet }} 
           [ ${{ steps.test-script-sweet.outputs.sweet }} != "sweet" ] && exit 1
           echo "🎉"
 
@@ -32,6 +33,7 @@ jobs:
           script: "test-script"
           args: "nice"
       - run: |
+          echo ${{ steps.test-script-sweet.outputs.nice }}
           [ ${{ steps.test-script-nice.outputs.nice }} != "nice" ] && exit 1
           echo "🎉"
 
