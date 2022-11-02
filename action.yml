@@ -32,7 +32,6 @@ runs:
         kit_dir="$HOME/.kit"
         node_dir="$HOME/.knode"
 
-
         kit_node="$node_dir/bin/node"
         kit_npm="$node_dir/bin/npm"
 
@@ -45,11 +44,7 @@ runs:
         [ ! -d "$node_dir/bin" ] && curl -sfLS https://install-node.vercel.app/v16.14.2 | bash -s -- -f --prefix $node_dir
         $kit_npm i --prefix $kit_dir @johnlindquist/kit
         $kit_npm i --prefix $kit_dir @actions/github
-
-        # echo $PATH
         $kit_node --version
-
-        # find . | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/" 
 
         export KENV="$HOME/work/${{ env.GITHUB_REPOSITORY_NAME_PART }}/${{ env.GITHUB_REPOSITORY_NAME_PART }}"
         cd $KENV
@@ -57,11 +52,8 @@ runs:
         $kit_npm i -D @johnlindquist/kit
         mkdir -p "$KENV/node_modules"
 
-
-        # find $project_dir | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/" 
-        export KIT_NODE_PATH="$HOME/.kit/node/bin"        
         echo "🏃‍♀️ Running ${{ inputs.script}} with ${{ inputs.args }}"
-        result=$($kit_node $KIT/run/terminal.js "${{ inputs.script }}" "${{ inputs.args }}" --trust | tr '\n' ' ')
+        result=$(NODE_OPTIONS='--trace-exit' $kit_node $KIT/run/terminal.js "${{ inputs.script }}" "${{ inputs.args }}" --trust | tr '\n' ' ')
 
         echo "console.log output below:"
         echo $result
