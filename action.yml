@@ -55,7 +55,7 @@ runs:
         echo "🏃‍♀️ Running ${{ inputs.script}} with ${{ inputs.args }}"
         result=$($kit_node $KIT/run/github-workflow.js "${{ inputs.script }}" "${{ inputs.args }}" --trust | tr '\n' ' ')
 
-        $exit_status = $?
+        exit_status = $?
         echo 'Exit status $exit_status'
         [[ $exit_status != 0 ]] exit
 
