@@ -20,7 +20,7 @@ jobs:
           args: "sweet"
       - run: |
           [ ${{ steps.test-script-sweet.outputs.result }} != "sweet" ] && exit 1
-          [ ${{ steps.test-script-sweet.outputs.result }} = "sweet" ] && echo "🎉"
+          [ ${{ steps.test-script-sweet.outputs.result }} = "sweet" ] && echo "Passed 🎉"
 
       - name: Script Kit run test-script nice
         id: test-script-nice
@@ -30,7 +30,7 @@ jobs:
           args: "nice"
       - run: |
           [ ${{ steps.test-script-nice.outputs.result }} != "nice" ] && exit 1
-          [ ${{ steps.test-script-nice.outputs.result }} = "nice" ] && echo "🎉"
+          [ ${{ steps.test-script-nice.outputs.result }} = "nice" ] && echo "Passed 🎉"
 
       - name: Script Kit test npm
         id: test-npm
