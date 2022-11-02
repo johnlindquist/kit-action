@@ -16,6 +16,8 @@ outputs:
 runs:
   using: "composite"
   steps:
+    - id: run
+
     - name: Inject slug/short variables
       uses: rlespinasse/github-slug-action@v3.x
 

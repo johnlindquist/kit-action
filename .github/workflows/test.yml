@@ -10,6 +10,9 @@ on: # rebuild any PRs and main branch changes
 jobs:
   test:
     runs-on: ubuntu-latest
+    outputs:
+      sweet: ${{ steps.test-script-sweet.outputs.result }}
+      nice: ${{ steps.test-script-sweet.outputs.result }}
     steps:
       - uses: actions/checkout@v2
       - name: Script Kit run test-script sweet
@@ -19,7 +22,7 @@ jobs:
           script: "test-script"
           args: "sweet"
       - run: |
-          [ ${{ steps.test-script-sweet.outputs.result }} != "sweet" ] && exit 1
+          [ ${{ steps.test-script-sweet.outputs.sweet }} != "sweet" ] && exit 1
           echo "🎉"
 
       - name: Script Kit run test-script nice
@@ -29,7 +32,7 @@ jobs:
           script: "test-script"
           args: "nice"
       - run: |
-          [ ${{ steps.test-script-nice.outputs.result }} != "nice" ] && exit 1
+          [ ${{ steps.test-script-nice.outputs.nice }} != "nice" ] && exit 1
           echo "🎉"
 
       - name: Script Kit test npm
