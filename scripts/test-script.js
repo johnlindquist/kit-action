@@ -1,3 +1,5 @@
+console.log(`Hello, world! 🌎`)
 let core = await npm("@actions/core")
 let value = await arg("hello")
 core.setOutput("result", value)
+console.log(`Goodbye, world! ${value} 🌍`)

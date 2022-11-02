@@ -54,10 +54,6 @@ runs:
         echo "🏃‍♀️ Running ${{ inputs.script}} with ${{ inputs.args }}"
 
         $kit_node $KIT/run/github-workflow.js "${{ inputs.script }}" "${{ inputs.args }}" --trust
-
-        exit_status="$?"
-        echo "Exit code: $exit_status"
-        [[ $exit_status != 0 ]] && exit
       shell: bash
 
     # - name: Check Result for Error
