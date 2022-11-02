@@ -1,4 +1,10 @@
 let { stdout } = await $`which npm`
-let { context } = await npm("@actions/github")
-let { Octokit } = await npm("@octokit/rest")
-console.log(stdout)
+let { Octokit } = await npm("express")
+let json = await readJSON("package.json")
+
+// if json includes @octkit/rest, then log "found"
+if (json.dependencies["express"]) {
+  console.log("found")
+} else {
+  console.log("not found")
+}
