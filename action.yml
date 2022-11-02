@@ -71,8 +71,12 @@ runs:
       uses: actions/github-script@v6
       with:
         script: |
-          console.log(`Testing...`)
-          console.log(`'$steps.script-kit.outputs.result'`)
+          console.log('Testing...')
+          if(${{ contains(steps.script-kit.outputs.result, 'Error') }}){
+            console.log(${{ toJSON(steps.script-kit.outputs.result) }})
+          }else{
+            console.log(`No 'Error' detected...`)
+          }
 
 # if(`${{ steps.script-kit.outputs.result }}`.includes('Error')){
 #   console.log(`😢 Failed due to Error in result string`)
