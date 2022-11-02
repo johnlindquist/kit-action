@@ -70,7 +70,7 @@ runs:
 
     - name: Check Result for Error
       if: ${{ steps.script-kit.outputs.result }} = *Error*
-      uses: actions/github-script@v3
+      uses: actions/github-script@v6
       with:
         script: |
           core.setFailed('${{ steps.test-get.outputs.result }}')
