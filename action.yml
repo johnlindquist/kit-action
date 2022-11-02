@@ -63,21 +63,21 @@ runs:
         echo "🏃‍♀️ Running ${{ inputs.script}} with ${{ inputs.args }}"
         result=$($KIT/bin/k "${{ inputs.script }}" "${{ inputs.args }}" --trust | tr '\n' ' ')
 
+        echo "console.log output below:"
         echo $result
         echo "result=$result" >> $GITHUB_OUTPUT
       shell: bash
 
-    - name: Check Result for Error
-      uses: actions/github-script@v6
-      with:
-        script: |
-          console.log('Testing...')
-          if(${{ contains(steps.script-kit.outputs.result, 'Error') }}){
-            console.log(${{ toJSON(steps.script-kit.outputs.result) }})
-          }else{
-            console.log(`No 'Error' detected...`)
-          }
-
+    # - name: Check Result for Error
+    #   uses: actions/github-script@v6
+    #   with:
+    #     script: |
+    #       console.log('Testing...')
+    #       if(${{ contains(steps.script-kit.outputs.result, 'Error') }}){
+    #         console.log(${{ toJSON(steps.script-kit.outputs.result) }})
+    #       }else{
+    #         console.log(`No 'Error' detected...`)
+    #       }
 # if(`${{ steps.script-kit.outputs.result }}`.includes('Error')){
 #   console.log(`😢 Failed due to Error in result string`)
 #   core.setFailed('${{ steps.test-get.outputs.result }}')
