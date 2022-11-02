@@ -62,6 +62,8 @@ runs:
         export KIT_NODE_PATH="$HOME/.kit/node/bin"        
         echo "🏃‍♀️ Running ${{ inputs.script}} with ${{ inputs.args }}"
         result=$($KIT/bin/k "${{ inputs.script }}" "${{ inputs.args }}" --trust | tr '\n' ' ')
+        [[ $result = *Error* ]] && exit 1
+
         echo $result
         echo "result=$result" >> $GITHUB_OUTPUT
       shell: bash
