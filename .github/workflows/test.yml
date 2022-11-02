@@ -39,8 +39,8 @@ jobs:
           script: "test-npm"
           args: "hello"
       - run: |
-          [ ${{ steps.test-script-nice.outputs.result }} != "Hello" ] && exit 1
-          [ ${{ steps.test-script-nice.outputs.result }} = "Hello" ] && echo "Passed 🎉"
+          [ ${{ steps.test-npm.outputs.result }} != "Hello" ] && exit 1
+          [ ${{ steps.test-npm.outputs.result }} = "Hello" ] && echo "Passed 🎉"
 
       - name: Script Kit run test get
         id: test-get
