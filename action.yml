@@ -52,6 +52,10 @@ runs:
         $kit_npm i -D @johnlindquist/kit
         mkdir -p "$KENV/node_modules"
 
+        # Create a package.json set to "module"
+        echo '{"type":"module"}' > $KENV/package.json
+
+
         echo "🏃‍♀️ Running ${{ inputs.script}} with ${{ inputs.args }}"
         # result=$($kit_node $KIT/run/github-workflow.js "${{ inputs.script }}" "${{ inputs.args }}" --trust | tr '\n' ' ')
         result=$($kit_node $KIT/run/github-workflow.js "${{ inputs.script }}" "${{ inputs.args }}" --trust)      
