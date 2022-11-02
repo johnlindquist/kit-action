@@ -54,7 +54,10 @@ runs:
 
         echo "🏃‍♀️ Running ${{ inputs.script}} with ${{ inputs.args }}"
         result=$(NODE_OPTIONS='--trace-exit' $kit_node $KIT/run/terminal.js "${{ inputs.script }}" "${{ inputs.args }}" --trust | tr '\n' ' ')
-
+          echo "Script: $? - Successfull"
+        if [ $? != 0 ]; then                   
+          echo "${?}\n". 1>&2 && exit 1
+        fi
         echo "console.log output below:"
         echo $result
         echo "result=$result" >> $GITHUB_OUTPUT
