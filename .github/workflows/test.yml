@@ -51,6 +51,7 @@ jobs:
           [ ${{ steps.test-get.outputs.result }} = "johnlindquist/kit" ] && echo "Passed 🎉"
 
       - name: Script Kit run test error
+        continue-on-error: true
         id: test-error
         uses: ./
         with:
