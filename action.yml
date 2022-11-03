@@ -2,7 +2,7 @@ name: "Script Kit Action"
 description: "Uses @johnlindquist/kit to run a script"
 author: "John Lindquist"
 inputs:
-  run:
+  script:
     required: true
     description: "name of a script in your ./scripts dir"
   args:
