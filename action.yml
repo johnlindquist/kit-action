@@ -29,6 +29,10 @@ runs:
     - name: Script Kit running ${{ inputs.script }}
       id: script-kit
       run: |
+        # Get name of the current step
+        step_name=$(echo $GITHUB_JOB | sed 's/ /-/g')
+        echo "step_name: $step_name"
+
         kit_dir="$HOME/.kit"
         node_dir="$HOME/.knode"
 
