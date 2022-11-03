@@ -43,7 +43,7 @@ runs:
         $kit_node --version
 
         # Get the repo name from the github context
-        repo_name=$(echo "${{ github.repository }}"" | cut -d "/" -f 2)
+        repo_name=$(echo "${{ github.repository }}" | cut -d "/" -f 2)
 
         export KENV="$HOME/work/$repo_name/$repo_name"
         cd $KENV
