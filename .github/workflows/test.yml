@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Script Kit run test-script sweet
-        id: test-script-sweet
+        id: test-script
         uses: ./
         with:
           script: "test-script"
@@ -31,6 +31,16 @@ jobs:
       - run: |
           [ ${{ steps.test-script-nice.outputs.result }} != "nice" ] && exit 1
           [ ${{ steps.test-script-nice.outputs.result }} = "nice" ] && echo "Passed 🎉"
+
+      - name: Script Kit run test-args
+        id: test-script-args
+        uses: ./
+        with:
+          script: "test-args"
+          args: John Lindquist
+      - run: |
+          [ ${{ steps.test-script-nice.outputs.result }} != "John Lindquist" ] && exit 1
+          [ ${{ steps.test-script-nice.outputs.result }} = "John Lindquist" ] && echo "Passed 🎉"
 
       - name: Script Kit test npm
         id: test-npm

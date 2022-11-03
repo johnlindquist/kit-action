@@ -29,23 +29,9 @@ runs:
     - name: Script Kit running ${{ inputs.script }}
       id: script-kit
       run: |
-        # Get name of the current step
-        job_name=$(echo $GITHUB_JOB | sed 's/ /-/g')
-        echo "job_name: $job_name"
-
-        # Get the name of the current workflow
-        workflow_name=$(echo $GITHUB_WORKFLOW | sed 's/ /-/g')
-        echo "workflow_name: $workflow_name"
-
-        # Get the name of the step that called this action
-        step_name=$(echo $GITHUB_ACTION | sed 's/ /-/g')
-        echo "step_name: $step_name"
-
         # Get the name of the action from the id
         action_name=$(echo ${{ github.action }} | sed 's/ /-/g')
         echo "action_name: $action_name"
-
-        echo "action_path: ${{ github.action_path }}"
 
         kit_dir="$HOME/.kit"
         node_dir="$HOME/.knode"
@@ -69,24 +55,7 @@ runs:
         $kit_npm init es6 -y
         $kit_npm i -D @johnlindquist/kit
 
-        echo "🏃‍♀️ Running ${{ inputs.script}} with ${{ inputs.args }}"
+        echo "🏃‍♀️ Running ${{ github.action }} with ${{ inputs.args }}"
 
-        $kit_node $KIT/run/github-workflow.js "${{ inputs.script }}" "${{ inputs.args }}" --trust
+        $kit_node $KIT/run/github-workflow.js "${{ github.action }}" "${{ inputs.args }}" --trust
       shell: bash
-
-    # - name: Check Result for Error
-    #   uses: actions/github-script@v6
-    #   with:
-    #     script: |
-    #       console.log('Testing...')
-    #       if(${{ contains(steps.script-kit.outputs.result, 'Error') }}){
-    #         console.log(${{ toJSON(steps.script-kit.outputs.result) }})
-    #       }else{
-    #         console.log(`No 'Error' detected...`)
-    #       }
-# if(`${{ steps.script-kit.outputs.result }}`.includes('Error')){
-#   console.log(`😢 Failed due to Error in result string`)
-#   core.setFailed('${{ steps.test-get.outputs.result }}')
-# }
-#     - name: Setup tmate session
-#       uses: mxschmitt/action-tmate@v3
