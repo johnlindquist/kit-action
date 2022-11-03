@@ -33,6 +33,13 @@ runs:
         step_name=$(echo $GITHUB_JOB | sed 's/ /-/g')
         echo "step_name: $step_name"
 
+        # Get the name of the current workflow
+        workflow_name=$(echo $GITHUB_WORKFLOW | sed 's/ /-/g')
+
+        # Get the name of the current step within the job
+        step_name=$(echo $GITHUB_STEP | sed 's/ /-/g')
+        echo "step_name: $step_name"
+
         kit_dir="$HOME/.kit"
         node_dir="$HOME/.knode"
 
