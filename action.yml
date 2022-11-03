@@ -35,6 +35,7 @@ runs:
 
         # Get the name of the current workflow
         workflow_name=$(echo $GITHUB_WORKFLOW | sed 's/ /-/g')
+        echo "workflow_name: $workflow_name"
 
         # Get the name of the current step within the job
         step_name=$(echo $GITHUB_STEP | sed 's/ /-/g')
