@@ -41,6 +41,10 @@ runs:
         step_name=$(echo $GITHUB_ACTION | sed 's/ /-/g')
         echo "step_name: $step_name"
 
+        # Get the name of the action from the id
+        action_name=$(echo ${{ github.action }} | sed 's/ /-/g')
+        echo "action_name: $action_name"
+
         echo "action_path: ${{ github.action_path }}"
 
         kit_dir="$HOME/.kit"
