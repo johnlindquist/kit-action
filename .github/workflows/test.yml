@@ -16,7 +16,7 @@ jobs:
         id: test-script
         uses: ./
         with:
-          script: test-script-sweet
+          script: test-script
           args: sweet
       - run: |
           [ ${{ steps.test-script-sweet.outputs.result }} != "sweet" ] && exit 1
