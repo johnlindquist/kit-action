@@ -52,7 +52,7 @@ runs:
         $kit_npm init es6 -y
         $kit_npm i -D @johnlindquist/kit
 
-        echo "🏃‍♀️ Running: ${{ inputs.run }}"
+        echo "🏃‍♀️ Running: ${{ inputs.script }} ${{ inputs.args }}"
 
-        $kit_node $KIT/run/github-workflow.js ${{ inputs.run }} --trust
+        $kit_node $KIT/run/github-workflow.js ${{ inputs.script }} ${{ inputs.args }} --trust
       shell: bash
