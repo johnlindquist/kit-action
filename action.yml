@@ -30,16 +30,18 @@ runs:
       id: script-kit
       run: |
         # Get name of the current step
-        step_name=$(echo $GITHUB_JOB | sed 's/ /-/g')
-        echo "step_name: $step_name"
+        job_name=$(echo $GITHUB_JOB | sed 's/ /-/g')
+        echo "job_name: $job_name"
 
         # Get the name of the current workflow
         workflow_name=$(echo $GITHUB_WORKFLOW | sed 's/ /-/g')
         echo "workflow_name: $workflow_name"
 
-        # Get the name of the current step within the job
-        step_name=$(echo $GITHUB_STEP | sed 's/ /-/g')
+        # Get the name of the step that called this action
+        step_name=$(echo $GITHUB_ACTION | sed 's/ /-/g')
         echo "step_name: $step_name"
+
+        echo "action_path: ${{ github.action_path }}"
 
         kit_dir="$HOME/.kit"
         node_dir="$HOME/.knode"
