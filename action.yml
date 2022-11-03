@@ -29,10 +29,6 @@ runs:
     - name: Script Kit running ${{ inputs.script }}
       id: script-kit
       run: |
-        # Get the name of the action from the id
-        action_name=$(echo ${{ github.action }} | sed 's/ /-/g')
-        echo "action_name: $action_name"
-
         kit_dir="$HOME/.kit"
         node_dir="$HOME/.knode"
 

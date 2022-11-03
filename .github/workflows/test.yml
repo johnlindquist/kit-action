@@ -16,8 +16,8 @@ jobs:
         id: test-script
         uses: ./
         with:
-          script: "test-script"
-          args: "sweet"
+          script: test-script-sweet
+          args: sweet
       - run: |
           [ ${{ steps.test-script-sweet.outputs.result }} != "sweet" ] && exit 1
           [ ${{ steps.test-script-sweet.outputs.result }} = "sweet" ] && echo "Passed 🎉"
@@ -26,8 +26,8 @@ jobs:
         id: test-script-nice
         uses: ./
         with:
-          script: "test-script"
-          args: "nice"
+          script: test-script
+          args: nice
       - run: |
           [ ${{ steps.test-script-nice.outputs.result }} != "nice" ] && exit 1
           [ ${{ steps.test-script-nice.outputs.result }} = "nice" ] && echo "Passed 🎉"
@@ -36,7 +36,7 @@ jobs:
         id: test-script-args
         uses: ./
         with:
-          script: "test-args"
+          script: test-args
           args: John Lindquist
       - run: |
           [ ${{ steps.test-script-nice.outputs.result }} != "Lindquist John" ] && exit 1
@@ -46,8 +46,8 @@ jobs:
         id: test-npm
         uses: ./
         with:
-          script: "test-npm"
-          args: "hello"
+          script: test-npm
+          args: hello
       - run: |
           [ ${{ steps.test-npm.outputs.result }} != "Hello" ] && exit 1
           [ ${{ steps.test-npm.outputs.result }} = "Hello" ] && echo "Passed 🎉"
@@ -56,7 +56,7 @@ jobs:
         id: test-get
         uses: ./
         with:
-          script: "test-get"
+          script: test-get
       - run: |
           [ ${{ steps.test-get.outputs.result }} != "johnlindquist/kit" ] && exit 1
           [ ${{ steps.test-get.outputs.result }} = "johnlindquist/kit" ] && echo "Passed 🎉"
@@ -66,4 +66,4 @@ jobs:
         id: test-error
         uses: ./
         with:
-          script: "test-error"
+          script: test-error
