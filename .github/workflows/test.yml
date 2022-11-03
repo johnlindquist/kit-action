@@ -39,8 +39,8 @@ jobs:
           script: test-args
           args: John Lindquist
       - run: |
-          [ ${{ steps.test-script-args.outputs.result }} != "Lindquist John" ] && exit 1
-          [ ${{ steps.test-script-args.outputs.result }} = "Lindquist John" ] && echo "Passed 🎉"
+          [ "${{ steps.test-script-args.outputs.result }}" != "Lindquist John" ] && exit 1
+          [ "${{ steps.test-script-args.outputs.result }}" = "Lindquist John" ] && echo "Passed 🎉"
 
       - name: Script Kit test npm
         id: test-npm
