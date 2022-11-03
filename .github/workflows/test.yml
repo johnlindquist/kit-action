@@ -16,8 +16,7 @@ jobs:
         id: test-script-sweet
         uses: ./
         with:
-          script: test-script
-          args: sweet
+          script: test-script sweet
       - run: |
           [ ${{ steps.test-script-sweet.outputs.result }} != "sweet" ] && exit 1
           [ ${{ steps.test-script-sweet.outputs.result }} = "sweet" ] && echo "Passed 🎉"
@@ -26,8 +25,7 @@ jobs:
         id: test-script-nice
         uses: ./
         with:
-          script: test-script
-          args: nice
+          script: test-script nice
       - run: |
           [ ${{ steps.test-script-nice.outputs.result }} != "nice" ] && exit 1
           [ ${{ steps.test-script-nice.outputs.result }} = "nice" ] && echo "Passed 🎉"
@@ -36,8 +34,7 @@ jobs:
         id: test-script-args
         uses: ./
         with:
-          script: test-args
-          args: John Lindquist
+          script: test-args John Lindquist
       - run: |
           [ "${{ steps.test-script-args.outputs.result }}" != "Lindquist John" ] && exit 1
           [ "${{ steps.test-script-args.outputs.result }}" = "Lindquist John" ] && echo "Passed 🎉"
@@ -46,8 +43,7 @@ jobs:
         id: test-npm
         uses: ./
         with:
-          script: test-npm
-          args: hello
+          script: test-npm hello
       - run: |
           [ ${{ steps.test-npm.outputs.result }} != "Hello" ] && exit 1
           [ ${{ steps.test-npm.outputs.result }} = "Hello" ] && echo "Passed 🎉"

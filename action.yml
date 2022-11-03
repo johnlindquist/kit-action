@@ -2,12 +2,13 @@ name: "Script Kit Action"
 description: "Uses @johnlindquist/kit to run a script"
 author: "John Lindquist"
 inputs:
-  script:
+  run:
     required: true
     description: "name of a script in your ./scripts dir"
   args:
     required: false
     description: "args to pass to the script"
+
 outputs:
   result:
     description: "result of the script args"
@@ -51,7 +52,7 @@ runs:
         $kit_npm init es6 -y
         $kit_npm i -D @johnlindquist/kit
 
-        echo "🏃‍♀️ Running: ${{ inputs.script }} ${{ inputs.args }}"
+        echo "🏃‍♀️ Running: ${{ inputs.run }}"
 
-        $kit_node $KIT/run/github-workflow.js ${{ inputs.script }} ${{ inputs.args }} --trust
+        $kit_node $KIT/run/github-workflow.js ${{ inputs.run }} --trust
       shell: bash
