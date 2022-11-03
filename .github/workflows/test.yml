@@ -57,6 +57,15 @@ jobs:
           [ ${{ steps.test-get.outputs.result }} != "johnlindquist/kit" ] && exit 1
           [ ${{ steps.test-get.outputs.result }} = "johnlindquist/kit" ] && echo "Passed 🎉"
 
+      - name: Script Kit run test read
+        id: test-read
+        uses: ./
+        with:
+          script: test-read
+      - run: |
+          [ ${{ steps.test-read.outputs.result }} != "success" ] && exit 1
+          [ ${{ steps.test-read.outputs.result }} = "success" ] && echo "Passed 🎉"
+
       - name: Script Kit run test error
         continue-on-error: true
         id: test-error
