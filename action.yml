@@ -86,5 +86,6 @@ runs:
 
         echo "🏃‍♀️ Running: ${{ inputs.script }} ${{ inputs.args }}"
 
-        KIT_CONTEXT="github-workflow" $kit_node $KIT/run/github-workflow.js ${{ inputs.script }} ${{ inputs.args }} --trust
+        KENV_PKG_DIR=${KENV_PKG_DIR:-scripts} $kit_node $KIT/run/github-workflow.js ${{ inputs.script }} ${{ inputs.args }} --trust
+
       shell: bash
