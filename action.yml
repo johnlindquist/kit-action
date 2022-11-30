@@ -36,6 +36,9 @@ runs:
         export KIT_NODE="$kit_node"        
         export KIT="$kit_dir/node_modules/@johnlindquist/kit"  
 
+        echo "KIT_NODE: $KIT_NODE"
+        echo "KIT: $KIT"
+
         mkdir -p $node_dir
         mkdir -p $kit_dir
 
