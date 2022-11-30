@@ -41,6 +41,10 @@ runs:
 
         echo "Installing @johnlindquist/kit to $kit_dir"
         $kit_npm i -D --prefix $kit_dir @johnlindquist/kit
+
+        # cat the $kit_dir package.json
+        cat $kit_dir/package.json
+
         $kit_node --version
 
         # Get the repo name from the github context
