@@ -57,10 +57,12 @@ runs:
         repo_name=$(echo "${{ github.repository }}" | cut -d "/" -f 2)
 
         export KENV="$HOME/work/$repo_name/$repo_name"
+
+        # cd into the scripts dir
         cd $KENV/scripts
 
-        echo "Creating $kit_npm/package.json"
-        $kit_npm init es6 -y
+        # if scripts/package.json doesn't exist, init
+        [ ! -f "package.json" ] && $kit_npm init es6 -y
 
         kenv_scripts=$KENV/scripts
 
@@ -75,10 +77,12 @@ runs:
         # ls the node_modules
         ls $kenv_scripts/node_modules
 
+        # cd back to the $KENV dir
         cd $KENV
 
         # If package.json doesn't exist, init
-        [ ! -f "$KENV/package.json" ] && $kit_npm init es6 -y
+        [ ! -f "package.json" ] && $kit_npm init es6 -y
+
 
         echo "🏃‍♀️ Running: ${{ inputs.script }} ${{ inputs.args }}"
 
