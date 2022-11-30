@@ -51,6 +51,9 @@ runs:
         $kit_npm i -D @johnlindquist/kit
         cd $KENV
 
+        # If package.json doesn't exist, init
+        [ ! -f "$KENV/package.json" ] && $kit_npm init es6 -y
+
         echo "🏃‍♀️ Running: ${{ inputs.script }} ${{ inputs.args }}"
 
         $kit_node $KIT/run/github-workflow.js ${{ inputs.script }} ${{ inputs.args }} --trust
