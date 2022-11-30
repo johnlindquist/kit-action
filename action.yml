@@ -47,8 +47,12 @@ runs:
 
         export KENV="$HOME/work/$repo_name/$repo_name"
         cd $KENV/scripts
+
         $kit_npm init es6 -y
+
+        echo "Installing @johnlindquist/kit in $KENV/scripts"
         $kit_npm i -D @johnlindquist/kit
+
         cd $KENV
 
         # If package.json doesn't exist, init
