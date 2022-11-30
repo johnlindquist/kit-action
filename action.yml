@@ -40,7 +40,7 @@ runs:
         [ ! -d "$node_dir/bin" ] && curl -sfLS https://install-node.vercel.app/v16.14.2 | bash -s -- -f --prefix $node_dir
 
         echo "Installing @johnlindquist/kit to $kit_dir"
-        $kit_npm i --prefix $kit_dir @johnlindquist/kit
+        $kit_npm i -D --prefix $kit_dir @johnlindquist/kit
         $kit_node --version
 
         # Get the repo name from the github context
@@ -54,9 +54,15 @@ runs:
         kenv_scripts=$KENV/scripts
 
         echo "Installing @actions/github to $kenv_scripts"
-        $kit_npm i --prefix $kenv_scripts @actions/github
+        $kit_npm i -D --prefix $kenv_scripts @actions/github
+
         echo "Installing @actions/core to $kenv_scripts"
-        $kit_npm i --prefix $kenv_scripts @actions/core
+        $kit_npm i -D --prefix $kenv_scripts @actions/core
+
+        # cat the scripts package.json
+        cat $kenv_scripts/package.json
+        # ls the node_modules
+        ls $kenv_scripts/node_modules
 
         cd $KENV
 
