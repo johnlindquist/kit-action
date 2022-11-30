@@ -38,8 +38,9 @@ runs:
 
         # Install node 16.14.2 if it doesn't exist    
         [ ! -d "$node_dir/bin" ] && curl -sfLS https://install-node.vercel.app/v16.14.2 | bash -s -- -f --prefix $node_dir
+
+        echo "Installing @johnlindquist/kit to $kit_dir"
         $kit_npm i --prefix $kit_dir @johnlindquist/kit
-        $kit_npm i --prefix $kit_dir @actions/github
         $kit_node --version
 
         # Get the repo name from the github context
@@ -50,8 +51,12 @@ runs:
 
         $kit_npm init es6 -y
 
-        echo "Installing @johnlindquist/kit in $KENV/scripts"
-        $kit_npm i -D @johnlindquist/kit
+        kenv_scripts=$KENV/scripts
+
+        echo "Installing @actions/github to $kenv_scripts"
+        $kit_npm i --prefix $kenv_scripts @actions/github
+        echo "Installing @actions/core to $kenv_scripts"
+        $kit_npm i --prefix $kenv_scripts @actions/core
 
         cd $KENV
 
