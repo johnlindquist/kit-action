@@ -30,6 +30,9 @@ runs:
         kit_node="$node_dir/bin/node"
         kit_npm="$node_dir/bin/npm"
 
+        echo "kit_node: $kit_node"
+        echo "kit_npm: $kit_npm"
+
         export KIT_NODE="$kit_node"        
         export KIT="$kit_dir/node_modules/@johnlindquist/kit"  
 
