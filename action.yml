@@ -46,8 +46,9 @@ runs:
         repo_name=$(echo "${{ github.repository }}" | cut -d "/" -f 2)
 
         export KENV="$HOME/work/$repo_name/$repo_name"
-        cd $KENV
+        cd $KENV/scripts
         $kit_npm init es6 -y
+        cd $KENV
         $kit_npm i -D @johnlindquist/kit
 
         echo "🏃‍♀️ Running: ${{ inputs.script }} ${{ inputs.args }}"
