@@ -82,7 +82,6 @@ runs:
         # If package.json doesn't exist, init
         [ ! -f "package.json" ] && $kit_npm init es6 -y
 
-
         echo "🏃‍♀️ Running: ${{ inputs.script }} ${{ inputs.args }}"
 
         SCRIPTS_DIR=${SCRIPTS_DIR:-scripts} $kit_node $KIT/run/github-workflow.js ${{ inputs.script }} ${{ inputs.args }} --trust
