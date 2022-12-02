@@ -65,8 +65,8 @@ runs:
 
         kenv_scripts=$KENV/scripts
 
-        echo "Linking kit dir"
-        $kit_npm i -D --prefix $kenv_scripts $kit_dir
+        echo "Linking kit dir $KIT to $kenv_scripts"
+        $kit_npm i -D --prefix $kenv_scripts $KIT
 
         echo "Installing @actions/github to $kenv_scripts"
         $kit_npm i -D --prefix $kenv_scripts @actions/github
