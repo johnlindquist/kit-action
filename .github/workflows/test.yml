@@ -22,6 +22,7 @@ jobs:
           [ ${{ steps.test-script-sweet.outputs.result }} != "sweet" ] && exit 1
           [ ${{ steps.test-script-sweet.outputs.result }} = "sweet" ] && echo "Passed 🎉"
 
+  test-mac:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
