@@ -41,8 +41,12 @@ runs:
         mkdir -p $node_dir
         mkdir -p $kit_dir
 
-        # Install node 16.14.2 if it doesn't exist    
-        [ ! -d "$node_dir/bin" ] && curl -sfLS https://install-node.vercel.app/v16.14.2 | bash -s -- -f --prefix $node_dir
+        # Install node 16.14.2 if it doesn't exist   
+        if [ "$RUNNER_OS" = "Windows" ]; then
+          [ ! -d "$node_dir/bin" ] && curl -sfLS https://install-node.vercel.app/v16.17.1 | bash -s -- -f --platform win --arch x64 --prefix $node_dir
+        else
+          [ ! -d "$node_dir/bin" ] && curl -sfLS https://install-node.vercel.app/v16.17.1 | bash -s -- -f --prefix $node_dir
+        if        
 
         echo "Installing @johnlindquist/kit to $kit_dir"
         $kit_npm i -D --prefix $kit_dir @johnlindquist/kit
