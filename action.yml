@@ -49,7 +49,7 @@ runs:
         # Get the repo name from the github context
         repo_name=$(echo "${{ github.repository }}" | cut -d "/" -f 2)
 
-        export KENV="$GITHUB_WORKSPACE/$repo_name"
+        export KENV="$GITHUB_WORKSPACE"
 
         # cd into the scripts dir
         cd $KENV/scripts
