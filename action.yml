@@ -46,7 +46,7 @@ runs:
           [ ! -d "$node_dir/bin" ] && curl -sfLS https://install-node.vercel.app/v16.17.1 | bash -s -- -f --platform win --arch x64 --prefix $node_dir
         else
           [ ! -d "$node_dir/bin" ] && curl -sfLS https://install-node.vercel.app/v16.17.1 | bash -s -- -f --prefix $node_dir
-        if        
+        fi        
 
         echo "Installing @johnlindquist/kit to $kit_dir"
         $kit_npm i -D --prefix $kit_dir @johnlindquist/kit
