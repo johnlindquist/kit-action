@@ -28,13 +28,7 @@ runs:
         kit_dir="$HOME/.kit"
         node_dir=$(which node | xargs dirname | xargs dirname)
 
-        echo "$node_dir/bin" >> $GITHUB_PATH
-
-        kit_node="$node_dir/bin/node"
-        kit_npm="$node_dir/bin/npm"
-
         echo "kit_node: $kit_node"
-        echo "kit_npm: $kit_npm"
 
         export KIT_NODE="$kit_node"        
         export KIT="$kit_dir/node_modules/@johnlindquist/kit"  
@@ -42,16 +36,15 @@ runs:
         echo "KIT_NODE: $KIT_NODE"
         echo "KIT: $KIT"
 
-        mkdir -p $node_dir
         mkdir -p $kit_dir     
 
         echo "Installing @johnlindquist/kit to $kit_dir"
-        $kit_npm i -D --prefix $kit_dir @johnlindquist/kit
+        npm i -D --prefix $kit_dir @johnlindquist/kit
 
         # cat the $kit_dir package.json
         cat $kit_dir/package.json
 
-        $kit_node --version
+        node --version
 
         # Get the repo name from the github context
         repo_name=$(echo "${{ github.repository }}" | cut -d "/" -f 2)
@@ -62,18 +55,18 @@ runs:
         cd $KENV/scripts
 
         # if scripts/package.json doesn't exist, init
-        [ ! -f "package.json" ] && $kit_npm init es6 -y
+        [ ! -f "package.json" ] && npm init es6 -y
 
         kenv_scripts=$KENV/scripts
 
         echo "Linking kit dir $KIT to $kenv_scripts"
-        $kit_npm i -D --prefix $kenv_scripts $KIT
+        npm i -D --prefix $kenv_scripts $KIT
 
         echo "Installing @actions/github to $kenv_scripts"
-        $kit_npm i -D --prefix $kenv_scripts @actions/github
+        npm i -D --prefix $kenv_scripts @actions/github
 
         echo "Installing @actions/core to $kenv_scripts"
-        $kit_npm i -D --prefix $kenv_scripts @actions/core
+        npm i -D --prefix $kenv_scripts @actions/core
 
         # cat the scripts package.json
         cat $kenv_scripts/package.json
@@ -84,10 +77,10 @@ runs:
         cd $KENV
 
         # If package.json doesn't exist, init
-        [ ! -f "package.json" ] && $kit_npm init es6 -y
+        [ ! -f "package.json" ] && npm init es6 -y
 
         echo "🏃‍♀️ Running: ${{ inputs.script }} ${{ inputs.args }}"
 
-        SCRIPTS_DIR=${SCRIPTS_DIR:-scripts} $kit_node $KIT/run/github-workflow.js ${{ inputs.script }} ${{ inputs.args }} --trust
+        SCRIPTS_DIR=${SCRIPTS_DIR:-scripts} node $KIT/run/github-workflow.js ${{ inputs.script }} ${{ inputs.args }} --trust
 
       shell: bash
