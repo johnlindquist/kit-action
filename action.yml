@@ -17,12 +17,16 @@ outputs:
 runs:
   using: "composite"
   steps:
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 16.17.1
+
     - name: Script Kit running ${{ inputs.script }}
       id: script-kit
       run: |
 
         kit_dir="$HOME/.kit"
-        node_dir="$HOME/.knode"
+        node_dir=$(which node | xargs dirname | xargs dirname)
 
         echo "$node_dir/bin" >> $GITHUB_PATH
 
@@ -39,14 +43,7 @@ runs:
         echo "KIT: $KIT"
 
         mkdir -p $node_dir
-        mkdir -p $kit_dir
-
-        # Install node 16.14.2 if it doesn't exist   
-        if [ "$RUNNER_OS" = "Windows" ]; then
-          [ ! -d "$node_dir/bin" ] && curl -sfLS https://install-node.vercel.app/v16.17.1 | bash -s -- -f --platform win --arch x64 --prefix $node_dir
-        else
-          [ ! -d "$node_dir/bin" ] && curl -sfLS https://install-node.vercel.app/v16.17.1 | bash -s -- -f --prefix $node_dir
-        fi        
+        mkdir -p $kit_dir     
 
         echo "Installing @johnlindquist/kit to $kit_dir"
         $kit_npm i -D --prefix $kit_dir @johnlindquist/kit

@@ -1,3 +1,3 @@
-let response = await get(`https://api.github.com/repos/johnlindquist/kit`)
+let response = await get(`https://www.scriptkit.com/api/get-sponsor-url`)
 
 core.setOutput("result", response.data.full_name)
