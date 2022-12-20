@@ -1,3 +1,3 @@
-let response = await get(`https://www.scriptkit.com/api/get-sponsor-url`)
+let response = await get(`https://www.scriptkit.com/api/kit-action`)
 
-core.setOutput("result", response.data.full_name)
+core.setOutput("result", response.data.kit)
