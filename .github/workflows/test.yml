@@ -19,8 +19,8 @@ jobs:
         with:
           script: test-script sweet
       - run: |
-          [ ${{ steps.test-script-sweet.outputs.result }} != "sweet" ] && exit 1
-          [ ${{ steps.test-script-sweet.outputs.result }} = "sweet" ] && echo "Passed 🎉"
+          if ((${{ steps.test-script-sweet.outputs.result }} -ne "sweet")) { exit 1 }
+          if ((${{ steps.test-script-sweet.outputs.result }} -eq "sweet")) { echo "Passed 🎉" }
 
   test-mac:
     runs-on: macos-latest
