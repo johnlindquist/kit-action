@@ -15,7 +15,7 @@ jobs:
 
       - name: Install tar
         run: |
-          npm i -D tar
+          npm i -D tar --prefix ./scripts
 
       - name: Script Kit test npm
         id: test-npm
