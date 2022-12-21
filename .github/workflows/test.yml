@@ -13,6 +13,22 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Script Kit run test-script sweet
+        id: test-script-sweet
+        uses: ./
+        with:
+          script: test-script sweet
+      - run: |
+          echo "KIT: $KIT"
+          echo "KIT_NODE: $KIT_NODE"
+          echo "KENV: $KENV"
+          echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"          
+          cat $KENV/package.json
+          cat $KENV/scripts/package.json
+
+          if (("${{ steps.test-script-sweet.outputs.result }}" -ne "sweet")) { exit 1 }
+          if (("${{ steps.test-script-sweet.outputs.result }}" -eq "sweet")) { echo "Passed 🎉" }
+
       - name: Script Kit test npm
         id: test-npm
         uses: ./
@@ -21,15 +37,6 @@ jobs:
       - run: |
           if (("${{ steps.test-script-sweet.outputs.result }}" -ne "Hello")) { exit 1 }
           if (("${{ steps.test-script-sweet.outputs.result }}" -eq "Hello")) { echo "Passed 🎉" }
-
-      - name: Script Kit run test-script sweet
-        id: test-script-sweet
-        uses: ./
-        with:
-          script: test-script sweet
-      - run: |
-          if (("${{ steps.test-script-sweet.outputs.result }}" -ne "sweet")) { exit 1 }
-          if (("${{ steps.test-script-sweet.outputs.result }}" -eq "sweet")) { echo "Passed 🎉" }
 
   test-mac:
     runs-on: macos-latest
