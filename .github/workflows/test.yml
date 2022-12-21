@@ -92,8 +92,8 @@ jobs:
         with:
           script: test-get
       - run: |
-          [ ${{ steps.test-get.outputs.result }} != "johnlindquist/kit" ] && exit 1
-          [ ${{ steps.test-get.outputs.result }} = "johnlindquist/kit" ] && echo "Passed 🎉"
+          [ ${{ steps.test-get.outputs.result }} != "@johnlindquist/kit" ] && exit 1
+          [ ${{ steps.test-get.outputs.result }} = "@johnlindquist/kit" ] && echo "Passed 🎉"
 
       - name: Script Kit run test read
         id: test-read
