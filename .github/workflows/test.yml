@@ -19,12 +19,12 @@ jobs:
         with:
           script: test-script sweet
       - run: |
-          echo "KIT: $KIT"
-          echo "KIT_NODE: $KIT_NODE"
-          echo "KENV: $KENV"
-          echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"          
-          cat $KENV/package.json
-          cat $KENV/scripts/package.json
+          Write-Output "KIT: $env:KIT"
+          Write-Output "KIT_NODE: $env:KIT_NODE"
+          Write-Output "KENV: $env:KENV"
+          Write-Output "GITHUB_WORKSPACE: $env:GITHUB_WORKSPACE"
+          Get-Content "$env:KENV/package.json"
+          Get-Content "$env:KENV/scripts/package.json"
 
           if (("${{ steps.test-script-sweet.outputs.result }}" -ne "sweet")) { exit 1 }
           if (("${{ steps.test-script-sweet.outputs.result }}" -eq "sweet")) { echo "Passed 🎉" }
