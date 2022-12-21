@@ -22,6 +22,15 @@ jobs:
           if ((${{ steps.test-script-sweet.outputs.result }} -ne "sweet")) { exit 1 }
           if ((${{ steps.test-script-sweet.outputs.result }} -eq "sweet")) { echo "Passed 🎉" }
 
+      - name: Script Kit test npm
+        id: test-npm
+        uses: ./
+        with:
+          script: test-npm hello
+      - run: |
+          if ((${{ steps.test-script-sweet.outputs.result }} -ne "Hello")) { exit 1 }
+          if ((${{ steps.test-script-sweet.outputs.result }} -eq "Hello")) { echo "Passed 🎉" }
+
   test-mac:
     runs-on: macos-latest
     steps:
