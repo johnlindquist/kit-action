@@ -55,9 +55,8 @@ runs:
         cd $KENV/scripts
 
         # if scripts/package.json doesn't exist, init
-        # [ ! -f "package.json" ] && npm init es6 -y
+        # [ ! -f "package.json" ] &&
         npm init es6 -y
-        npm i -D tar
 
         kenv_scripts=$KENV/scripts
 
