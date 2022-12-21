@@ -13,10 +13,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install tar
-        run: |
-          npm i -D tar --prefix ./scripts
-
       - name: Script Kit test npm
         id: test-npm
         uses: ./
