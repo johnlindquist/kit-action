@@ -22,7 +22,6 @@ jobs:
           Write-Output "KIT: $env:KIT"
           Write-Output "KIT_NODE: $env:KIT_NODE"
           Write-Output "KENV: $env:KENV"
-          Write-Output "GITHUB_WORKSPACE: $env:GITHUB_WORKSPACE"
           Write-Output "SCRIPTS_DIR: $env:SCRIPTS_DIR"
           Get-Content "$env:KENV/package.json"
           Get-Content "$env:KENV/scripts/package.json"
