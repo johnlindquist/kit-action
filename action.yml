@@ -81,6 +81,11 @@ runs:
 
         echo "🏃‍♀️ Running: ${{ inputs.script }} ${{ inputs.args }}"
 
-        SCRIPTS_DIR=${SCRIPTS_DIR:-scripts} node $KIT/run/github-workflow.js ${{ inputs.script }} ${{ inputs.args }} --trust
+        # If SCRIPTS_DIR is not set, set it to scripts
+        if [ -z "$SCRIPTS_DIR" ]; then
+          export SCRIPTS_DIR=scripts
+        fi
+
+        node $KIT/run/github-workflow.js ${{ inputs.script }} ${{ inputs.args }} --trust
 
       shell: bash
