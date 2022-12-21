@@ -51,6 +51,11 @@ runs:
 
         export KENV="$GITHUB_WORKSPACE"
 
+        # Write KENV to the env file
+        echo "KENV=$KENV" >> $GITHUB_ENV
+        echo "KIT=$KIT" >> $GITHUB_ENV
+        echo "KIT_NODE=$KIT_NODE" >> $GITHUB_ENV
+
         # cd into the scripts dir
         cd $KENV/scripts
 
@@ -85,6 +90,7 @@ runs:
         # If SCRIPTS_DIR is not set, set it to scripts
         if [ -z "$SCRIPTS_DIR" ]; then
           export SCRIPTS_DIR=scripts
+          echo "SCRIPTS_DIR=$SCRIPTS_DIR" >> $GITHUB_ENV
         fi
 
         node $KIT/run/github-workflow.js ${{ inputs.script }} ${{ inputs.args }} --trust
