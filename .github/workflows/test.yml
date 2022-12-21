@@ -13,14 +13,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Script Kit run test-script sweet
-        id: test-script-sweet
-        uses: ./
-        with:
-          script: test-script sweet
-      - run: |
-          if (("${{ steps.test-script-sweet.outputs.result }}" -ne "sweet")) { exit 1 }
-          if (("${{ steps.test-script-sweet.outputs.result }}" -eq "sweet")) { echo "Passed 🎉" }
+      - name: Install tar
+        run: |
+          npm i -D tar --prefix ./scripts
 
       - name: Script Kit test npm
         id: test-npm
@@ -30,6 +25,15 @@ jobs:
       - run: |
           if (("${{ steps.test-script-sweet.outputs.result }}" -ne "Hello")) { exit 1 }
           if (("${{ steps.test-script-sweet.outputs.result }}" -eq "Hello")) { echo "Passed 🎉" }
+
+      - name: Script Kit run test-script sweet
+        id: test-script-sweet
+        uses: ./
+        with:
+          script: test-script sweet
+      - run: |
+          if (("${{ steps.test-script-sweet.outputs.result }}" -ne "sweet")) { exit 1 }
+          if (("${{ steps.test-script-sweet.outputs.result }}" -eq "sweet")) { echo "Passed 🎉" }
 
   test-mac:
     runs-on: macos-latest
