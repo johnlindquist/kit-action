@@ -35,8 +35,8 @@ jobs:
         with:
           script: test-npm hello
       - run: |
-          if (("${{ steps.test-script-sweet.outputs.result }}" -ne "Hello")) { exit 1 }
-          if (("${{ steps.test-script-sweet.outputs.result }}" -eq "Hello")) { echo "Passed 🎉" }
+          if (("${{ steps.test-npm.outputs.result }}" -ne "Hello")) { exit 1 }
+          if (("${{ steps.test-npm.outputs.result }}" -eq "Hello")) { echo "Passed 🎉" }
 
   test-mac:
     runs-on: macos-latest
