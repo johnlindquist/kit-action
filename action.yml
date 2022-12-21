@@ -26,7 +26,7 @@ runs:
       run: |
 
         kit_dir="$HOME/.kit"
-        node_dir=$(which node | xargs dirname | xargs dirname)
+        kit_node=$(which node | xargs dirname | xargs dirname)
 
         echo "kit_node: $kit_node"
 
