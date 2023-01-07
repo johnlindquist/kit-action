@@ -73,9 +73,9 @@ runs:
         npm i -D --prefix $kenv_scripts @actions/core
 
         # cat the scripts package.json
-        cat $kenv_scripts/package.json
+        # cat $kenv_scripts/package.json
         # ls the node_modules
-        ls $kenv_scripts/node_modules
+        # ls $kenv_scripts/node_modules
 
         # cd back to the $KENV dir
         cd $KENV
