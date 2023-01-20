@@ -1,6 +1,8 @@
 name: "build-test"
 on: # rebuild any PRs and main branch changes
   workflow_dispatch:
+    branches:
+      - main
   pull_request:
   push:
     branches:
