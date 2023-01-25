@@ -28,7 +28,10 @@ runs:
     - name: Clone repo
       run: |
         # Check if already cloned into the workspace
-        [ ! -d "$GITHUB_WORKSPACE/.git" ] && git clone https://github.com/${{ github.repository }} $GITHUB_WORKSPACE
+        # If the GITHUB_WORKSPACE doesn't have a .git derectory, then clone it
+        echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
+        ls -la $GITHUB_WORKSPACE        
+        [ ! -d "$GITHUB_WORKSPACE/.git" ] && git clone $GITHUB_REPOSITORY $GITHUB_WORKSPACE
 
       shell: bash
 
