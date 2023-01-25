@@ -27,13 +27,16 @@ runs:
 
     - name: Clone repo
       run: |
-        # Get the repo name from the github context
-        repo_name=$(echo "${{ github.repository }}" | cut -d "/" -f 2)
+        # ls the GITHUB_WORKSPACE
+        ls $GITHUB_WORKSPACE
+        # echo the current dir
+        pwd 
         # Check if the repo exists
-        echo "Checking if $repo_name exists"
-        [ ! -d "$repo_name" ] && git clone https://github.com/${{ github.repository }} $repo_name
+        [ ! -d "$repo_name" ] && git clone https://github.com/${{ github.repository }} $GITHUB_WORKSPACE        
         # echo the GITHUB_WORKSPACE
         echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
+        # ls the GITHUB_WORKSPACE
+        ls $GITHUB_WORKSPACE
 
       shell: bash
 
