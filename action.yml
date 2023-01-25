@@ -33,8 +33,12 @@ runs:
         echo "GITHUB_REPOSITORY: $GITHUB_REPOSITORY"
         ls -la $GITHUB_WORKSPACE     
         # If the GITHUB_WORKSPACE doesn't have a .git dir, then clone it
-        [ ! -d "$GITHUB_WORKSPACE/.git" ] && echo "Cloning $GITHUB_REPOSITORY to $GITHUB_WORKSPACE" && git clone
-        [ ! -d "$GITHUB_WORKSPACE/.git" ] && git clone https://github.com/$GITHUB_REPOSITORY $GITHUB_WORKSPACE
+        if [ ! -d "$GITHUB_WORKSPACE/.git" ]; then
+          echo "Cloning $GITHUB_REPOSITORY into $GITHUB_WORKSPACE"
+          git clone https://github.com/$GITHUB_REPOSITORY.git $GITHUB_WORKSPACE
+        else
+          echo "Already cloned $GITHUB_REPOSITORY into $GITHUB_WORKSPACE"
+        fi
 
       shell: bash
 
