@@ -27,16 +27,8 @@ runs:
 
     - name: Clone repo
       run: |
-        # ls the GITHUB_WORKSPACE
-        ls $GITHUB_WORKSPACE
-        # echo the current dir
-        pwd 
-        # Check if the repo exists
-        [ ! -d "$GITHUB_WORKSPACE" ] && git clone https://github.com/${{ github.repository }} $GITHUB_WORKSPACE        
-        # echo the GITHUB_WORKSPACE
-        echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
-        # ls the GITHUB_WORKSPACE
-        ls $GITHUB_WORKSPACE
+        # Check if already cloned into the workspace
+        [ ! -d "$GITHUB_WORKSPACE/.git" ] && git clone https://github.com/${{ github.repository }} $GITHUB_WORKSPACE
 
       shell: bash
 
