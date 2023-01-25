@@ -18,10 +18,10 @@ runs:
   using: "composite"
   steps:
     # If the repo doesn't exist, clone it
-    - name: Clone repo
-      uses: actions/checkout@v3
-      with:
-        clean: false
+    # - name: Clone repo
+    #   uses: actions/checkout@v3
+    #   with:
+    #     clean: false
 
     - uses: actions/setup-node@v3
       with:
