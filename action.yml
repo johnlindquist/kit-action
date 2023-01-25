@@ -31,7 +31,10 @@ runs:
         repo_name=$(echo "${{ github.repository }}" | cut -d "/" -f 2)
         # Check if the repo exists
         echo "Checking if $repo_name exists"
-        [ ! -d "$repo_name" ] && git clone ${{ github.repository }} $repo_name
+        [ ! -d "$repo_name" ] && git clone https://github.com/${{ github.repository }} $repo_name
+        # echo the GITHUB_WORKSPACE
+        echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
+
       shell: bash
 
     - uses: actions/setup-node@v3
