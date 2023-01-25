@@ -32,7 +32,7 @@ runs:
         # echo the current dir
         pwd 
         # Check if the repo exists
-        [ ! -d "$repo_name" ] && git clone https://github.com/${{ github.repository }} $GITHUB_WORKSPACE        
+        [ ! -d "$GITHUB_WORKSPACE" ] && git clone https://github.com/${{ github.repository }} $GITHUB_WORKSPACE        
         # echo the GITHUB_WORKSPACE
         echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
         # ls the GITHUB_WORKSPACE
