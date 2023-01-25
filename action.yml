@@ -23,6 +23,16 @@ runs:
     #   with:
     #     clean: false
 
+    # If the repo doesn't exist, clone it with git
+
+    - name: Clone repo
+      run: |
+        # Get the repo name from the github context
+        repo_name=$(echo "${{ github.repository }}" | cut -d "/" -f 2)
+        # Check if the repo exists
+        echo "Checking if $repo_name exists"
+        [ ! -d "$repo_name" ] && git clone ${{ github.repository }} $repo_name
+
     - uses: actions/setup-node@v3
       with:
         node-version: 16.17.1
@@ -49,9 +59,6 @@ runs:
         cat $kit_dir/package.json
 
         node --version
-
-        # Get the repo name from the github context
-        repo_name=$(echo "${{ github.repository }}" | cut -d "/" -f 2)
 
         export KENV="$GITHUB_WORKSPACE"
 
