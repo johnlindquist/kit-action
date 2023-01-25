@@ -32,6 +32,7 @@ runs:
         # Check if the repo exists
         echo "Checking if $repo_name exists"
         [ ! -d "$repo_name" ] && git clone ${{ github.repository }} $repo_name
+      shell: bash
 
     - uses: actions/setup-node@v3
       with:
