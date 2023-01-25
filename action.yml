@@ -31,8 +31,10 @@ runs:
         # If the GITHUB_WORKSPACE doesn't have a .git derectory, then clone it
         echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
         echo "GITHUB_REPOSITORY: $GITHUB_REPOSITORY"
-        ls -la $GITHUB_WORKSPACE        
-        [ ! -d "$GITHUB_WORKSPACE"/.git ] && git clone https://github.com/$GITHUB_REPOSITORY $GITHUB_WORKSPACE
+        ls -la $GITHUB_WORKSPACE     
+        # If the GITHUB_WORKSPACE doesn't have a .git dir, then clone it
+        [ ! -d "$GITHUB_WORKSPACE/.git" ] && echo "Cloning $GITHUB_REPOSITORY to $GITHUB_WORKSPACE" && git clone
+        [ ! -d "$GITHUB_WORKSPACE/.git" ] && git clone https://github.com/$GITHUB_REPOSITORY $GITHUB_WORKSPACE
 
       shell: bash
 
