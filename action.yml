@@ -77,7 +77,7 @@ runs:
         # Otherwise, assign it to $KENV/scripts
         if [ ! -f "$HOME/package.json" ]; then
           export KENV_PREFIX=$HOME
-        if [ ! -f "$KENV/package.json" ]; then
+        elif [ ! -f "$KENV/package.json" ]; then
           export KENV_PREFIX=$KENV
         else
           export KENV_PREFIX=$KENV/scripts
