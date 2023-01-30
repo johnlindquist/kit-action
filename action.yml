@@ -77,22 +77,35 @@ runs:
         # Otherwise, assign it to $KENV/scripts
         if [ ! -f "$HOME/package.json" ]; then
           export KENV_PREFIX=$HOME
+        if [ ! -f "$KENV/package.json" ]; then
+          export KENV_PREFIX=$KENV
         else
           export KENV_PREFIX=$KENV/scripts
         fi
 
 
-        echo "Creating $PREFIX/package.json"
-        npm init es6 -y --prefix $PREFIX
+        echo "Creating $KENV_PREFIX/package.json"
+        npm init es6 -y --prefix $KENV_PREFIX
 
-        echo "Linking kit dir $KIT to $kenv_scripts"
-        npm i -D $KIT --prefix $PREFIX
+        echo "Linking kit dir $KIT to $KENV_PREFIX"
+        npm i -D $KIT --prefix $KENV_PREFIX
 
-        echo "Installing @actions/github to $kenv_scripts"
-        npm i -D @actions/github --prefix $PREFIX
+        echo "Installing @actions/github to $KENV_PREFIX"
+        npm i -D @actions/github --prefix $KENV_PREFIX
 
-        echo "Installing @actions/core to $kenv_scripts"
-        npm i -D @actions/core --prefix $PREFIX
+        echo "Installing @actions/core to $KENV_PREFIX"
+        npm i -D @actions/core --prefix $KENV_PREFIX
+
+        # if package.json doesn't exist in $KENV, create it
+        if [ ! -f "$KENV/package.json" ]; then
+          echo "Creating $KENV/package.json"
+          npm init es6 -y --prefix $KENV
+        # init package.json in $KENV/scripts if it doesn't exist
+        elif [ ! -f "$KENV/scripts/package.json" ]; then
+          echo "Creating $KENV/scripts/package.json"
+          npm init es6 -y --prefix $KENV/scripts
+        fi
+
 
         echo "🏃‍♀️ Running: ${{ inputs.script }} ${{ inputs.args }}"
 
