@@ -102,6 +102,8 @@ runs:
           echo "SCRIPTS_DIR=$SCRIPTS_DIR" >> $GITHUB_ENV
         fi
 
+        cd $KENV
+
         node $KIT/run/github-workflow.js ${{ inputs.script }} ${{ inputs.args }} --trust
 
       shell: bash
