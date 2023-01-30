@@ -25,13 +25,8 @@ runs:
 
     # If the repo doesn't exist, clone it with git
 
-    - name: Clone repo
+    - name: Conditional clone
       run: |
-        # Check if already cloned into the workspace
-        # If the GITHUB_WORKSPACE doesn't have a .git derectory, then clone it
-        echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
-        echo "GITHUB_REPOSITORY: $GITHUB_REPOSITORY"
-        ls -la $GITHUB_WORKSPACE     
         # If the GITHUB_WORKSPACE doesn't have a .git dir, then clone it
         if [ ! -d "$GITHUB_WORKSPACE/.git" ]; then
           echo "Cloning $GITHUB_REPOSITORY into $GITHUB_WORKSPACE"
@@ -76,34 +71,28 @@ runs:
         echo "KIT=$KIT" >> $GITHUB_ENV
         echo "KIT_NODE=$KIT_NODE" >> $GITHUB_ENV
 
-        # cd into the scripts dir
-        cd $KENV/scripts
+        # Check if package.json exists in $HOME
 
-        # if scripts/package.json doesn't exist, init
-        # [ ! -f "package.json" ] &&
-        npm init es6 -y
+        # Assign $KENV_PREFIX to $HOME if $HOME/package.json doesn't exist
+        # Otherwise, assign it to $KENV/scripts
+        if [ ! -f "$HOME/package.json" ]; then
+          export KENV_PREFIX=$HOME
+        else
+          export KENV_PREFIX=$KENV/scripts
+        fi
 
-        kenv_scripts=$KENV/scripts
+
+        echo "Creating $PREFIX/package.json"
+        npm init es6 -y --prefix $PREFIX
 
         echo "Linking kit dir $KIT to $kenv_scripts"
-        npm i -D --prefix $kenv_scripts $KIT
+        npm i -D $KIT --prefix $PREFIX
 
         echo "Installing @actions/github to $kenv_scripts"
-        npm i -D --prefix $kenv_scripts @actions/github
+        npm i -D @actions/github --prefix $PREFIX
 
         echo "Installing @actions/core to $kenv_scripts"
-        npm i -D --prefix $kenv_scripts @actions/core
-
-        # cat the scripts package.json
-        # cat $kenv_scripts/package.json
-        # ls the node_modules
-        # ls $kenv_scripts/node_modules
-
-        # cd back to the $KENV dir
-        cd $KENV
-
-        # If package.json doesn't exist, init
-        [ ! -f "package.json" ] && npm init es6 -y
+        npm i -D @actions/core --prefix $PREFIX
 
         echo "🏃‍♀️ Running: ${{ inputs.script }} ${{ inputs.args }}"
 
