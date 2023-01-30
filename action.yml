@@ -69,23 +69,15 @@ runs:
         # Write KENV to the env file
         echo "KENV=$KENV" >> $GITHUB_ENV
         echo "KIT=$KIT" >> $GITHUB_ENV
-        echo "KIT_NODE=$KIT_NODE" >> $GITHUB_ENV
+        echo "KIT_NODE=$KIT_NODE" >> $GITHUB_ENV  
 
-        # Check if package.json exists in $HOME
+        export KENV_PREFIX=$KENV/scripts
 
-        # Assign $KENV_PREFIX to $HOME if $HOME/package.json doesn't exist
-        # Otherwise, assign it to $KENV/scripts
-        if [ ! -f "$HOME/package.json" ]; then
-          export KENV_PREFIX=$HOME
-        elif [ ! -f "$KENV/package.json" ]; then
-          export KENV_PREFIX=$KENV
-        else
-          export KENV_PREFIX=$KENV/scripts
-        fi
-
-
-        echo "Creating $KENV_PREFIX/package.json"
-        npm init es6 -y --prefix $KENV_PREFIX
+        # If $KENV_PREFIX pacakge.json doesn't exist, create it
+        if [ ! -f "$KENV_PREFIX/package.json" ]; then
+          echo "Creating $KENV_PREFIX/package.json"
+          npm init es6 -y --prefix $KENV_PREFIX     
+        fi        
 
         echo "Linking kit dir $KIT to $KENV_PREFIX"
         npm i -D $KIT --prefix $KENV_PREFIX
@@ -94,18 +86,7 @@ runs:
         npm i -D @actions/github --prefix $KENV_PREFIX
 
         echo "Installing @actions/core to $KENV_PREFIX"
-        npm i -D @actions/core --prefix $KENV_PREFIX
-
-        # if package.json doesn't exist in $KENV, create it
-        if [ ! -f "$KENV/package.json" ]; then
-          echo "Creating $KENV/package.json"
-          npm init es6 -y --prefix $KENV
-        # init package.json in $KENV/scripts if it doesn't exist
-        elif [ ! -f "$KENV/scripts/package.json" ]; then
-          echo "Creating $KENV/scripts/package.json"
-          npm init es6 -y --prefix $KENV/scripts
-        fi
-
+        npm i -D @actions/core --prefix $KENV_PREFIX     
 
         echo "🏃‍♀️ Running: ${{ inputs.script }} ${{ inputs.args }}"
 
