@@ -73,6 +73,12 @@ runs:
 
         export KENV_PREFIX=$KENV/scripts
 
+        # If $KENV/package.json doesn't exist, create it
+        if [ ! -f "$KENV/package.json" ]; then
+          echo "Creating $KENV/package.json"
+          cd $KENV && npm init es6 -y
+        fi
+
         # If $KENV_PREFIX pacakge.json doesn't exist, create it
         if [ ! -f "$KENV_PREFIX/package.json" ]; then
           echo "Creating $KENV_PREFIX/package.json"
