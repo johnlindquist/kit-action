@@ -39,7 +39,7 @@ runs:
 
     - uses: actions/setup-node@v3
       with:
-        node-version: 16.17.1
+        node-version: 18.15.0
 
     - name: Script Kit running ${{ inputs.script }}
       id: script-kit
