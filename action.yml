@@ -105,5 +105,8 @@ runs:
         cd $KENV
 
         node $KIT/run/github-workflow.js ${{ inputs.script }} ${{ inputs.args }} --trust
-
+        if [ $? -ne 0 ]; then
+          echo "${{ inputs.script }} failed"
+          exit 1
+        fi
       shell: bash
