@@ -104,8 +104,12 @@ runs:
 
         cd $KENV
 
-        $KNODE/bin/node $KIT/run/github-workflow.js ${{ inputs.script }} ${{ inputs.args }} --trust
-        # TODO: Make this cross platform so it works on Windows
+        if [[ "$RUNNER_OS" == "Windows" ]]; then
+          $KNODE/bin/node.exe $KIT/run/github-workflow.js ${{ inputs.script }} ${{ inputs.args }} --trust
+        else
+          $KNODE/bin/node $KIT/run/github-workflow.js ${{ inputs.script }} ${{ inputs.args }} --trust
+        fi
+
         if [ $? -ne 0 ]; then
           echo "${{ inputs.script }} failed"
           exit 1
