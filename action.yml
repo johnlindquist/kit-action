@@ -104,8 +104,9 @@ runs:
 
         cd $KENV
 
+        find $KNODE -type f
         if [[ "$RUNNER_OS" == "Windows" ]]; then
-          $KNODE/bin/node.exe $KIT/run/github-workflow.js ${{ inputs.script }} ${{ inputs.args }} --trust
+          $KNODE/bin/node.cmd $KIT/run/github-workflow.js ${{ inputs.script }} ${{ inputs.args }} --trust
         else
           $KNODE/bin/node $KIT/run/github-workflow.js ${{ inputs.script }} ${{ inputs.args }} --trust
         fi
