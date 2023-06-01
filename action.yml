@@ -104,9 +104,14 @@ runs:
 
         cd $KENV
 
+        # Echo RUNNER_OS and system details
+        echo "RUNNER_OS: $RUNNER_OS"
+
         if [[ "$RUNNER_OS" == "Windows" ]]; then
+          echo "Running $KNODE/x64/node.exe $KIT/run/github-workflow.js ${{ inputs.script }} ${{ inputs.args }} --trust"
           $KNODE/x64/node.exe $KIT/run/github-workflow.js ${{ inputs.script }} ${{ inputs.args }} --trust
         else
+          echo "Running $KNODE/bin/node $KIT/run/github-workflow.js ${{ inputs.script }} ${{ inputs.args }} --trust"
           $KNODE/bin/node $KIT/run/github-workflow.js ${{ inputs.script }} ${{ inputs.args }} --trust
         fi
 
