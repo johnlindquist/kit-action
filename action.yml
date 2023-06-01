@@ -54,6 +54,10 @@ runs:
         echo "KNODE: $KNODE"
         echo "KIT: $KIT"
 
+        # Echo all files recursively in $KNODE
+        echo "Files in $KNODE"
+        find $KNODE
+
         mkdir -p $kit_dir     
 
         echo "Installing @johnlindquist/kit to $kit_dir"
