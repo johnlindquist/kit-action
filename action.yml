@@ -22,15 +22,16 @@ runs:
       id: check_repo
       run: |
         if [ -d "$GITHUB_WORKSPACE/.git" ]; then
-          echo "::set-output name=repo_exists::true"
+          echo "repo_exists=true" >> $GITHUB_STATE
         else
-          echo "::set-output name=repo_exists::false"
+          echo "repo_exists=false" >> $GITHUB_STATE
         fi
       shell: bash
 
     # If the repo doesn't exist, clone it
     - name: Clone repo
-      if: steps.check_repo.outputs.repo_exists == 'false'
+      # Check GITHUB_STATE to see if repo_exists=true
+      if: ${{ env.STATE_repo_exists == 'false' }}
       uses: actions/checkout@v3
       with:
         clean: false
