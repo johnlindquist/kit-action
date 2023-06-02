@@ -22,16 +22,16 @@ runs:
       id: check_repo
       run: |
         if [ -d "$GITHUB_WORKSPACE/.git" ]; then
-          echo "repo_exists=true" >> $GITHUB_STATE
+          echo "repo_already_cloned=true" >> $GITHUB_ENV
         else
-          echo "repo_exists=false" >> $GITHUB_STATE
+          echo "repo_already_cloned=false" >> $GITHUB_ENV
         fi
       shell: bash
 
     # If the repo doesn't exist, clone it
     - name: Clone repo
       # Check GITHUB_STATE to see if repo_exists=true
-      if: ${{ env.STATE_repo_exists == 'false' }}
+      if: ${{ env.repo_already_cloned == 'false' }}
       uses: actions/checkout@v3
       with:
         clean: false
