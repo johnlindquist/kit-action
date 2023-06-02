@@ -17,25 +17,23 @@ outputs:
 runs:
   using: "composite"
   steps:
-    # If the repo doesn't exist, clone it
-    # - name: Clone repo
-    #   uses: actions/checkout@v3
-    #   with:
-    #     clean: false
-
-    # If the repo doesn't exist, clone it with git
-
-    - name: Conditional clone
+    # Check if the directory exists
+    - name: Check if repo is already cloned
+      id: check_repo
       run: |
-        # If the GITHUB_WORKSPACE doesn't have a .git dir, then clone it
-        if [ ! -d "$GITHUB_WORKSPACE/.git" ]; then
-          echo "Cloning $GITHUB_REPOSITORY into $GITHUB_WORKSPACE"
-          git clone https://github.com/$GITHUB_REPOSITORY.git $GITHUB_WORKSPACE
+        if [ -d "$GITHUB_WORKSPACE/.git" ]; then
+          echo "::set-output name=repo_exists::true"
         else
-          echo "Already cloned $GITHUB_REPOSITORY into $GITHUB_WORKSPACE"
+          echo "::set-output name=repo_exists::false"
         fi
-
       shell: bash
+
+    # If the repo doesn't exist, clone it
+    - name: Clone repo
+      if: steps.check_repo.outputs.repo_exists == 'false'
+      uses: actions/checkout@v3
+      with:
+        clean: false
 
     - uses: actions/setup-node@v3
       with:
