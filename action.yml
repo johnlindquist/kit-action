@@ -35,6 +35,8 @@ runs:
       uses: actions/checkout@v3
       with:
         clean: false
+        # get the default branch
+        ref: ${{ github.ref }}
 
     - uses: actions/setup-node@v3
       with:
