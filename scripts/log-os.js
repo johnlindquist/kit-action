@@ -1,3 +1,5 @@
+import os from "os"
+
 console.log(`Current platform details:`)
 // Log out all the "OS" details
 
