@@ -20,13 +20,6 @@ jobs:
         uses: ./
         with:
           script: log-os
-      - run: |
-          Write-Output "KIT: $env:KIT"
-          Write-Output "KIT_NODE: $env:KIT_NODE"
-          Write-Output "KENV: $env:KENV"
-          Write-Output "SCRIPTS_DIR: $env:SCRIPTS_DIR"
-          Get-Content "$env:KENV/package.json"
-          Get-Content "$env:KENV/scripts/package.json"
 
       - name: Script Kit run test-script sweet
         id: test-script-sweet
@@ -63,13 +56,6 @@ jobs:
         uses: ./
         with:
           script: log-os
-      - run: |
-          Write-Output "KIT: $env:KIT"
-          Write-Output "KIT_NODE: $env:KIT_NODE"
-          Write-Output "KENV: $env:KENV"
-          Write-Output "SCRIPTS_DIR: $env:SCRIPTS_DIR"
-          Get-Content "$env:KENV/package.json"
-          Get-Content "$env:KENV/scripts/package.json"
 
       - name: Script Kit run test-script sweet
         id: test-script-sweet
@@ -90,13 +76,6 @@ jobs:
         uses: ./
         with:
           script: log-os
-      - run: |
-          Write-Output "KIT: $env:KIT"
-          Write-Output "KIT_NODE: $env:KIT_NODE"
-          Write-Output "KENV: $env:KENV"
-          Write-Output "SCRIPTS_DIR: $env:SCRIPTS_DIR"
-          Get-Content "$env:KENV/package.json"
-          Get-Content "$env:KENV/scripts/package.json"
 
       - name: Script Kit run test-ts John
         id: test-script-ts
