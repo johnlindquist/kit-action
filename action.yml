@@ -112,10 +112,10 @@ runs:
 
         if [[ "$RUNNER_OS" == "Windows" ]]; then
           echo "Running $KNODE/x64/node.exe $KIT/run/github-workflow.js ${{ inputs.script }} ${{ inputs.args }} --trust"
-          $KNODE/x64/node.exe $KIT/run/github-workflow.js ${{ inputs.script }} ${{ inputs.args }} --trust
+          $KNODE/x64/node.exe --experimental-loader $KIT/build/loader.js $KIT/run/github-workflow.js ${{ inputs.script }} ${{ inputs.args }} --trust
         else
           echo "Running $KNODE/bin/node $KIT/run/github-workflow.js ${{ inputs.script }} ${{ inputs.args }} --trust"
-          $KNODE/bin/node $KIT/run/github-workflow.js ${{ inputs.script }} ${{ inputs.args }} --trust
+          $KNODE/bin/node --experimental-loader $KIT/build/loader.js $KIT/run/github-workflow.js ${{ inputs.script }} ${{ inputs.args }} --trust
         fi
 
         if [ $? -ne 0 ]; then
