@@ -44,7 +44,7 @@ runs:
       id: script-kit
       run: |
 
-        kit_dir="$HOME/.kit"
+        kit_dir="$(pwd)/../.kit"
         kit_node=$(which node | xargs dirname | xargs dirname)
         kit_npm=$(which npm | xargs dirname)
 
