@@ -44,7 +44,7 @@ runs:
       id: script-kit
       run: |
 
-        kit_dir="$(pwd)/.kit"
+        kit_dir="$HOME/.kit"
         kit_node=$(which node | xargs dirname | xargs dirname)
         kit_npm=$(which npm | xargs dirname)
 
@@ -52,7 +52,7 @@ runs:
         export PATH="$PATH:$kit_npm"
 
         export KNODE="$kit_node"        
-        export KIT="$kit_dir/node_modules/@johnlindquist/kit"  
+        export KIT=$(realpath --relative-to=$(pwd) "$kit_dir/node_modules/@johnlindquist/kit")
 
         echo "KNODE: $KNODE"
         echo "KIT: $KIT"
