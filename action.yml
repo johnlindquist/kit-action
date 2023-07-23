@@ -111,7 +111,8 @@ runs:
         echo "RUNNER_OS: $RUNNER_OS"
 
         if [[ "$RUNNER_OS" == "Windows" ]]; then
-          KIT=$(echo $KIT | sed -e 's|^/([a-z])/|/\U\1:/|')
+          DRIVE=${KIT:1:1}
+          KIT=${KIT/\//$DRIVE:\/}
           echo "Running $KNODE/x64/node.exe --experimental-loader $KIT/build/loader.js $KIT/run/github-workflow.js ${{ inputs.script }} ${{ inputs.args }} --trust"
           # TODO: Fix error "Error [ERR_UNSUPPORTED_ESM_URL_SCHEME]: Only URLs with a scheme in: file and data are supported by the default ESM loader. On Windows, absolute paths must be valid file:// URLs. "
           $KNODE/x64/node.exe --experimental-loader "file://$KIT/build/loader.js" "$KIT/run/github-workflow.js" ${{ inputs.script }} ${{ inputs.args }} --trust
