@@ -155,3 +155,10 @@ jobs:
         uses: ./
         with:
           script: test-error
+
+      - name: Script Kit install tar from package.json
+        continue-on-error: true
+        id: test-import-tar-from-package
+        uses: ./
+        with:
+          script: test-import-tar-from-package
