@@ -163,5 +163,5 @@ jobs:
         with:
           script: test-import-tar-from-package
       - run: |
-        [ ${{ steps.test-import-tar-from-package.result }} != "success" ] && exit 1
-        [ ${{ steps.test-import-tar-from-package.result }} = "success" ] && echo "Passed 🎉"
+          [ "${{ steps.test-import-tar-from-package.outputs.result }}" != "success" ] && exit 1
+          [ "${{ steps.test-import-tar-from-package.outputs.result }}" = "success" ] && echo "Passed 🎉"
