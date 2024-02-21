@@ -3,10 +3,12 @@ on: # rebuild any PRs and main branch changes
   workflow_dispatch:
     branches:
       - main
+      - next
   pull_request:
   push:
     branches:
       - main
+      - next
       - "releases/*"
 
 jobs:
