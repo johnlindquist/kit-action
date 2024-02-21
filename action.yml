@@ -29,6 +29,8 @@ runs:
           echo "kit_tag=next" >> $GITHUB_OUTPUT
         fi
         echo "kit_tag has been set successfully."
+      shell: bash
+
     # Check if the directory exists
     - name: Check if repo is already cloned
       id: check_repo
