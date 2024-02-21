@@ -17,6 +17,18 @@ outputs:
 runs:
   using: "composite"
   steps:
+    - name: Set kit_tag to next or main
+      id: set_kit_tag
+      run: |
+        echo "Determining the kit_tag based on the branch name..."
+        if [ "${{ github.ref_name }}" = "main" ]; then
+          echo "Branch is 'main'. Setting kit_tag to 'latest'."
+          echo "kit_tag=latest" >> $GITHUB_OUTPUT
+        else
+          echo "Branch is not 'main'. Assuming it's 'next'. Setting kit_tag to 'next'."
+          echo "kit_tag=next" >> $GITHUB_OUTPUT
+        fi
+        echo "kit_tag has been set successfully."
     # Check if the directory exists
     - name: Check if repo is already cloned
       id: check_repo
@@ -60,7 +72,7 @@ runs:
         mkdir -p $kit_dir     
 
         echo "Installing @johnlindquist/kit to $kit_dir"
-        npm i -D --prefix $kit_dir @johnlindquist/kit
+        npm i -D --prefix $kit_dir @johnlindquist/kit@${{ steps.set_kit_tag.outputs.kit_tag }}
 
         # cat the $kit_dir package.json
         cat $kit_dir/package.json
