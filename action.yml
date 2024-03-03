@@ -50,7 +50,7 @@ runs:
       with:
         clean: false
 
-    - uses: actions/setup-node@v3
+    - uses: actions/setup-node@v4
       with:
         node-version: 20.9.0
 
@@ -73,7 +73,7 @@ runs:
 
         mkdir -p $kit_dir     
 
-        echo "Installing @johnlindquist/kit to $kit_dir"
+        echo "Installing @johnlindquist/kit@${{ steps.set_kit_tag.outputs.kit_tag }} to $kit_dir"
         npm i -D --prefix $kit_dir @johnlindquist/kit@${{ steps.set_kit_tag.outputs.kit_tag }}
 
         # cat the $kit_dir package.json
