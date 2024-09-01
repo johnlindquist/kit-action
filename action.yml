@@ -46,7 +46,7 @@ runs:
     - name: Clone repo
       # Check GITHUB_STATE to see if repo_exists=true
       if: ${{ env.repo_already_cloned == 'false' }}
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         clean: false
 
