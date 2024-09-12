@@ -81,6 +81,7 @@ runs:
 
         echo "Installing @johnlindquist/kit@${{ steps.set_kit_tag.outputs.kit_tag }} to $kit_dir"
         pnpm i --no-lockfile --no-optional --prefix $kit_dir @johnlindquist/kit@${{ steps.set_kit_tag.outputs.kit_tag }}
+        pnpm i --no-lockfile --no-optional --prefix $kit_dir/node_modules/@johnlindquist/kit @actions/github @actions/core 
 
         # cat the $kit_dir package.json
         cat $kit_dir/package.json
@@ -109,7 +110,7 @@ runs:
         fi        
 
         echo "Linking kit dir $KIT to $KENV_PREFIX"
-        pnpm i --no-lockfile --no-optional $KIT @actions/github @actions/core --prefix $KENV_PREFIX     
+        pnpm i --no-lockfile --no-optional $KIT --prefix $KENV_PREFIX     
 
         echo "🏃‍♀️ Running: ${{ inputs.script }} ${{ inputs.args }}"
 
