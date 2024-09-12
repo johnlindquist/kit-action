@@ -131,9 +131,11 @@ runs:
           KIT="${KIT/\/$drive_letter\//\/$drive_letter:/}"
           echo "pnpm node --experimental-loader $KIT/build/loader.js $KIT/run/github-workflow.js ${{ inputs.script }} ${{ inputs.args }} --trust"
           # TODO: Fix error "Error [ERR_UNSUPPORTED_ESM_URL_SCHEME]: Only URLs with a scheme in: file and data are supported by the default ESM loader. On Windows, absolute paths must be valid file:// URLs. "
+          pnpm node --version
           pnpm node --experimental-loader "file://$KIT/build/loader.js" "$KIT/run/github-workflow.js" ${{ inputs.script }} ${{ inputs.args }} --trust
         else
-          echo "Running $KNODE/bin/node $KIT/run/github-workflow.js ${{ inputs.script }} ${{ inputs.args }} --trust"
+          echo "pnpm node --experimental-loader $KIT/build/loader.js $KIT/run/github-workflow.js ${{ inputs.script }} ${{ inputs.args }} --trust"
+          pnpm node --version
           pnpm node --experimental-loader "$KIT/build/loader.js" "$KIT/run/github-workflow.js" ${{ inputs.script }} ${{ inputs.args }} --trust
         fi
 
