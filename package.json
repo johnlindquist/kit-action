@@ -1,0 +1,12 @@
+{
+  "name": "kit-action",
+  "version": "1.0.0",
+  "description": "Kit Action is a GitHub Action that allows you to run a script created in Script Kit",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
