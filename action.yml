@@ -109,7 +109,7 @@ runs:
         fi        
 
         echo "Linking kit dir $KIT to $KENV_PREFIX"
-        pnpm i --no-optional $KIT @actions/github @actions/core --prefix $KENV_PREFIX     
+        pnpm i --no-lockfile --no-optional $KIT @actions/github @actions/core --prefix $KENV_PREFIX     
 
         echo "🏃‍♀️ Running: ${{ inputs.script }} ${{ inputs.args }}"
 
