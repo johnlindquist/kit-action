@@ -78,51 +78,29 @@ jobs:
 
   test-ubuntu:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        test: [log-os, test-ts, test-script-sweet, test-kit, test-script-nice, test-args, test-get, test-read, test-error, test-import-tar-from-package]
     steps:
       - uses: actions/checkout@v4
-
-      - name: Script Kit run log OS
-        id: log-os
+      
+      - name: Run ${{ matrix.test }}
+        id: run-test
         uses: ./
         with:
-          script: log-os
+          script: ${{ matrix.test }}
+        continue-on-error: ${{ matrix.test == 'test-error' }}
+      
+      - name: Check result
+        if: matrix.test != 'log-os' && matrix.test != 'test-error'
+        run: |
+          [ "${{ steps.run-test.outputs.result }}" != "${{ matrix.test == 'test-args' && 'Lindquist John' || matrix.test == 'test-npm' && 'Hello' || matrix.test == 'test-get' && '@johnlindquist/kit' || 'success' }}" ] && exit 1
+          echo "Passed 🎉"
 
-      - name: Script Kit run test-ts John
-        id: test-script-ts
-        uses: ./
-        with:
-          script: test-ts John
-      - run: |
-          [ ${{ steps.test-script-ts.outputs.result }} != "John" ] && exit 1
-          [ ${{ steps.test-script-ts.outputs.result }} = "John" ] && echo "Passed 🎉"
-
-      - name: Script Kit run test-script sweet
-        id: test-script-sweet
-        uses: ./
-        with:
-          script: test-script sweet
-      - run: |
-          [ ${{ steps.test-script-sweet.outputs.result }} != "sweet" ] && exit 1
-          [ ${{ steps.test-script-sweet.outputs.result }} = "sweet" ] && echo "Passed 🎉"
-
-      - name: Script Kit run test-kit
-        id: test-kit
-        uses: ./
-        with:
-          script: test-kit
-      - run: |
-          [ ${{ steps.test-kit.outputs.result }} != "success" ] && exit 1
-          [ ${{ steps.test-kit.outputs.result }} = "success" ] && echo "Passed 🎉"
-
-      - name: Script Kit run test-script nice
-        id: test-script-nice
-        uses: ./
-        with:
-          script: test-script nice
-      - run: |
-          [ ${{ steps.test-script-nice.outputs.result }} != "nice" ] && exit 1
-          [ ${{ steps.test-script-nice.outputs.result }} = "nice" ] && echo "Passed 🎉"
-
+  test-ubuntu-args:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
       - name: Script Kit run test-args
         id: test-script-args
         uses: ./
@@ -131,47 +109,3 @@ jobs:
       - run: |
           [ "${{ steps.test-script-args.outputs.result }}" != "Lindquist John" ] && exit 1
           [ "${{ steps.test-script-args.outputs.result }}" = "Lindquist John" ] && echo "Passed 🎉"
-
-      - name: Script Kit test npm
-        id: test-npm
-        uses: ./
-        with:
-          script: test-npm hello
-      - run: |
-          [ ${{ steps.test-npm.outputs.result }} != "Hello" ] && exit 1
-          [ ${{ steps.test-npm.outputs.result }} = "Hello" ] && echo "Passed 🎉"
-
-      - name: Script Kit run test get
-        id: test-get
-        uses: ./
-        with:
-          script: test-get
-      - run: |
-          [ ${{ steps.test-get.outputs.result }} != "@johnlindquist/kit" ] && exit 1
-          [ ${{ steps.test-get.outputs.result }} = "@johnlindquist/kit" ] && echo "Passed 🎉"
-
-      - name: Script Kit run test read
-        id: test-read
-        uses: ./
-        with:
-          script: test-read
-      - run: |
-          [ ${{ steps.test-read.outputs.result }} != "success" ] && exit 1
-          [ ${{ steps.test-read.outputs.result }} = "success" ] && echo "Passed 🎉"
-
-      - name: Script Kit run test error
-        continue-on-error: true
-        id: test-error
-        uses: ./
-        with:
-          script: test-error
-
-      - name: Script Kit install tar from package.json
-        continue-on-error: true
-        id: test-import-tar-from-package
-        uses: ./
-        with:
-          script: test-import-tar-from-package
-      - run: |
-          [ "${{ steps.test-import-tar-from-package.outputs.result }}" != "success" ] && exit 1
-          [ "${{ steps.test-import-tar-from-package.outputs.result }}" = "success" ] && echo "Passed 🎉"
