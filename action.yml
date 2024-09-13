@@ -59,7 +59,6 @@ runs:
       uses: actions/setup-node@v4
       with:
         node-version: 20.17.0
-        cache: 'pnpm'
 
     - name: Script Kit running ${{ inputs.script }}
       id: script-kit
