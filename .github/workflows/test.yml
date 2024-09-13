@@ -132,14 +132,14 @@ jobs:
           [ "${{ steps.test-script-args.outputs.result }}" != "Lindquist John" ] && exit 1
           [ "${{ steps.test-script-args.outputs.result }}" = "Lindquist John" ] && echo "Passed 🎉"
 
-      # - name: Script Kit test npm
-      #   id: test-npm
-      #   uses: ./
-      #   with:
-      #     script: test-npm hello
-      # - run: |
-      #     [ ${{ steps.test-npm.outputs.result }} != "Hello" ] && exit 1
-      #     [ ${{ steps.test-npm.outputs.result }} = "Hello" ] && echo "Passed 🎉"
+      - name: Script Kit test npm
+        id: test-npm
+        uses: ./
+        with:
+          script: test-npm hello
+      - run: |
+          [ ${{ steps.test-npm.outputs.result }} != "Hello" ] && exit 1
+          [ ${{ steps.test-npm.outputs.result }} = "Hello" ] && echo "Passed 🎉"
 
       - name: Script Kit run test get
         id: test-get
