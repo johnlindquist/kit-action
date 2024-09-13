@@ -81,6 +81,7 @@ runs:
         export KIT="$kit_dir/node_modules/@johnlindquist/kit"  
 
         echo "KIT: $KIT"
+        echo "NODE_PATH: $NODE_PATH"
 
         mkdir -p $kit_dir     
 
