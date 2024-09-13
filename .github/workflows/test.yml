@@ -49,6 +49,7 @@ jobs:
 
       - name: Script Kit test npm
         id: test-npm
+        continue-on-error: false
         uses: ./
         with:
           script: test-npm hello
@@ -135,6 +136,7 @@ jobs:
       - name: Script Kit test npm
         id: test-npm
         uses: ./
+        continue-on-error: false
         with:
           script: test-npm hello
       - run: |
