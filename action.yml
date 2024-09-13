@@ -66,8 +66,13 @@ runs:
       run: |
 
         kit_dir="$HOME/.kit"
-        kit_node=$(which pnpm node | xargs dirname | xargs dirname)
-        kit_npm=$(which pnpm | xargs dirname)
+        pnpm_path=$(which pnpm | head -n 1)
+        node_path=$(which pnpm node | head -n 1)
+        kit_node=$(dirname $(dirname $node_path))
+        echo "pnpm_path: $pnpm_path"
+        echo "node_path: $node_path"
+        echo "kit_node: $kit_node"
+        kit_npm=$(dirname $pnpm_path)
 
         # Add npm to PATH
         export PATH="$PATH:$kit_npm"
