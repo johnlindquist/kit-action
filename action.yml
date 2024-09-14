@@ -66,21 +66,15 @@ runs:
 
         kit_dir="$HOME/.kit"
         pnpm_path=$(which pnpm | head -n 1)
-        node_path=$(which pnpm node | head -n 1)
-        kit_node=$(dirname $(dirname $node_path))
         echo "pnpm_path: $pnpm_path"
-        echo "node_path: $node_path"
-        echo "kit_node: $kit_node"
         kit_npm=$(dirname $pnpm_path)
 
         # Add npm to PATH
         export PATH="$PATH:$kit_npm"
 
-        export NODE_PATH="$kit_node"        
         export KIT="$kit_dir/node_modules/@johnlindquist/kit"  
 
         echo "KIT: $KIT"
-        echo "NODE_PATH: $NODE_PATH"
 
         mkdir -p $kit_dir     
 
@@ -98,7 +92,6 @@ runs:
         # Write KENV to the env file
         echo "KENV=$KENV" >> $GITHUB_ENV
         echo "KIT=$KIT" >> $GITHUB_ENV
-        echo "NODE_PATH=$NODE_PATH" >> $GITHUB_ENV  
 
         export KENV_PREFIX=$KENV/scripts
 
