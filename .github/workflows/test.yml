@@ -3,20 +3,27 @@ on: # rebuild any PRs and main branch changes
   workflow_dispatch:
     branches:
       - main
+      - next
   pull_request:
   push:
     branches:
       - main
+      - next
       - "releases/*"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 
 jobs:
   test-windows:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20.16.0
+          node-version: 20.17.0
 
       - name: Script Kit run log OS
         id: log-os
@@ -42,6 +49,7 @@ jobs:
 
       - name: Script Kit test npm
         id: test-npm
+        continue-on-error: false
         uses: ./
         with:
           script: test-npm hello
@@ -52,7 +60,7 @@ jobs:
   test-mac:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Script Kit run log OS
         id: log-os
@@ -72,7 +80,7 @@ jobs:
   test-ubuntu:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Script Kit run log OS
         id: log-os
@@ -128,6 +136,7 @@ jobs:
       - name: Script Kit test npm
         id: test-npm
         uses: ./
+        continue-on-error: false
         with:
           script: test-npm hello
       - run: |

@@ -17,6 +17,20 @@ outputs:
 runs:
   using: "composite"
   steps:
+    - name: Set kit_tag to next or main
+      id: set_kit_tag
+      run: |
+        echo "Determining the kit_tag based on the branch name..."
+        if [ "${{ github.ref_name }}" = "main" ]; then
+          echo "Branch is 'main'. Setting kit_tag to 'latest'."
+          echo "kit_tag=latest" >> $GITHUB_OUTPUT
+        else
+          echo "Branch is not 'main'. Assuming it's 'next'. Setting kit_tag to 'next'."
+          echo "kit_tag=next" >> $GITHUB_OUTPUT
+        fi
+        echo "kit_tag has been set successfully."
+      shell: bash
+
     # Check if the directory exists
     - name: Check if repo is already cloned
       id: check_repo
@@ -32,46 +46,51 @@ runs:
     - name: Clone repo
       # Check GITHUB_STATE to see if repo_exists=true
       if: ${{ env.repo_already_cloned == 'false' }}
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         clean: false
 
-    - uses: actions/setup-node@v4
+    - uses: pnpm/action-setup@v4
+      name: Install pnpm
       with:
-        node-version: 20.16.0
+        version: 9.10.0
+
+    - name: Install Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20.17.0
 
     - name: Script Kit running ${{ inputs.script }}
       id: script-kit
       run: |
         kit_dir="$HOME/.kit"
-        kit_node=$(which node | xargs dirname | xargs dirname)
-        kit_npm=$(which npm | xargs dirname)
+        pnpm_path=$(which pnpm | head -n 1)
+        echo "pnpm_path: $pnpm_path"
+        kit_npm=$(dirname $pnpm_path)
 
         # Add npm to PATH
         export PATH="$PATH:$kit_npm"
 
-        export KNODE="$kit_node"        
         export KIT="$kit_dir/node_modules/@johnlindquist/kit"  
 
-        echo "KNODE: $KNODE"
         echo "KIT: $KIT"
 
         mkdir -p $kit_dir     
 
-        echo "Installing @johnlindquist/kit to $kit_dir"
-        npm i -D --prefix $kit_dir @johnlindquist/kit
+        echo "Installing @johnlindquist/kit@${{ steps.set_kit_tag.outputs.kit_tag }} to $kit_dir"
+        pnpm i --no-lockfile --prefix $kit_dir @johnlindquist/kit@${{ steps.set_kit_tag.outputs.kit_tag }}
+        pnpm i --no-lockfile --prefix $kit_dir/node_modules/@johnlindquist/kit @actions/github @actions/core 
 
         # cat the $kit_dir package.json
         cat $kit_dir/package.json
 
-        node --version
+        pnpm node --version
 
         export KENV="$GITHUB_WORKSPACE"
 
         # Write KENV to the env file
         echo "KENV=$KENV" >> $GITHUB_ENV
         echo "KIT=$KIT" >> $GITHUB_ENV
-        echo "KNODE=$KNODE" >> $GITHUB_ENV  
 
         export KENV_PREFIX=$KENV/scripts
 
@@ -88,13 +107,7 @@ runs:
         fi        
 
         echo "Linking kit dir $KIT to $KENV_PREFIX"
-        npm i -D $KIT --prefix $KENV_PREFIX
-
-        echo "Installing @actions/github to $KENV_PREFIX"
-        npm i -D @actions/github --prefix $KENV_PREFIX
-
-        echo "Installing @actions/core to $KENV_PREFIX"
-        npm i -D @actions/core --prefix $KENV_PREFIX     
+        pnpm i --no-lockfile $KIT --prefix $KENV_PREFIX     
 
         echo "🏃‍♀️ Running: ${{ inputs.script }} ${{ inputs.args }}"
 
@@ -113,12 +126,14 @@ runs:
           drive_letter=${KIT:1:1}
           echo "drive_letter: $drive_letter"
           KIT="${KIT/\/$drive_letter\//\/$drive_letter:/}"
-          echo "Running $KNODE/x64/node.exe --experimental-loader $KIT/build/loader.js $KIT/run/github-workflow.js ${{ inputs.script }} ${{ inputs.args }} --trust"
+          echo "pnpm node --experimental-loader $KIT/build/loader.js $KIT/run/github-workflow.js ${{ inputs.script }} ${{ inputs.args }} --trust"
           # TODO: Fix error "Error [ERR_UNSUPPORTED_ESM_URL_SCHEME]: Only URLs with a scheme in: file and data are supported by the default ESM loader. On Windows, absolute paths must be valid file:// URLs. "
-          $KNODE/x64/node.exe --experimental-loader "file://$KIT/build/loader.js" "$KIT/run/github-workflow.js" ${{ inputs.script }} ${{ inputs.args }} --trust
+          pnpm node --version
+          pnpm node --experimental-loader "file://$KIT/build/loader.js" "$KIT/run/github-workflow.js" ${{ inputs.script }} ${{ inputs.args }} --trust
         else
-          echo "Running $KNODE/bin/node $KIT/run/github-workflow.js ${{ inputs.script }} ${{ inputs.args }} --trust"
-          $KNODE/bin/node --experimental-loader "$KIT/build/loader.js" "$KIT/run/github-workflow.js" ${{ inputs.script }} ${{ inputs.args }} --trust
+          echo "pnpm node --experimental-loader $KIT/build/loader.js $KIT/run/github-workflow.js ${{ inputs.script }} ${{ inputs.args }} --trust"
+          pnpm node --version
+          pnpm node --experimental-loader "$KIT/build/loader.js" "$KIT/run/github-workflow.js" ${{ inputs.script }} ${{ inputs.args }} --trust
         fi
 
         if [ $? -ne 0 ]; then
