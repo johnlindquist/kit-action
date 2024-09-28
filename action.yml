@@ -63,7 +63,6 @@ runs:
     - name: Script Kit running ${{ inputs.script }}
       id: script-kit
       run: |
-
         kit_dir="$HOME/.kit"
         pnpm_path=$(which pnpm | head -n 1)
         echo "pnpm_path: $pnpm_path"
