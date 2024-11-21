@@ -50,14 +50,29 @@ runs:
       with:
         clean: false
 
+    - name: Check if pnpm is installed
+      id: check-pnpm
+      shell: bash
+      run: |
+        if command -v pnpm >/dev/null 2>&1; then
+          echo "pnpm is already installed."
+          echo "pnpm_installed=true" >> $GITHUB_OUTPUT
+        else
+          echo "pnpm is not installed."
+          echo "pnpm_installed=false" >> $GITHUB_OUTPUT
+        fi
+
     - name: Get PNPM version from packageManager in package.json
+      if: ${{ steps.check-pnpm.outputs.pnpm_installed == 'false' }}
       id: pnpm-version
       shell: bash
       run: |
         pnpm_version=$(grep '"packageManager"' package.json | awk -F '"' '{print $4}' | grep '^pnpm@' | cut -d'@' -f2 || echo "latest")
+        echo "Found pnpm version: $pnpm_version"
         echo "pnpm_version=${pnpm_version}" >> $GITHUB_OUTPUT
 
     - uses: pnpm/action-setup@v4
+      if: ${{ steps.check-pnpm.outputs.pnpm_installed == 'false' }}
       name: Install pnpm
       with:
         version: ${{ steps.pnpm-version.outputs.pnpm_version }}
