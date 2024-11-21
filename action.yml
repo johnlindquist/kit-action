@@ -50,10 +50,17 @@ runs:
       with:
         clean: false
 
+    - name: Get PNPM version from packageManager in package.json
+      id: pnpm-version
+      shell: bash
+      run: |
+        pnpm_version=$(grep '"packageManager"' package.json | awk -F '"' '{print $4}' | grep '^pnpm@' | cut -d'@' -f2 || echo "latest")
+        echo "pnpm_version=${pnpm_version}" >> $GITHUB_OUTPUT
+
     - uses: pnpm/action-setup@v4
       name: Install pnpm
       with:
-        version: 9.10.0
+        version: ${{ steps.pnpm-version.outputs.pnpm_version }}
 
     - name: Install Node.js
       uses: actions/setup-node@v4
