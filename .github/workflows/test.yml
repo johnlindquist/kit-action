@@ -87,14 +87,14 @@ jobs:
         with:
           script: log-os
 
-      # - name: Script Kit run test-ts John
-      #   id: test-script-ts
-      #   uses: ./
-      #   with:
-      #     script: test-ts John
-      # - run: |
-      #     [ ${{ steps.test-script-ts.outputs.result }} != "John" ] && exit 1
-      #     [ ${{ steps.test-script-ts.outputs.result }} = "John" ] && echo "Passed 🎉"
+      - name: Script Kit run test-ts John
+        id: test-script-ts
+        uses: ./
+        with:
+          script: test-ts John
+      - run: |
+          [ ${{ steps.test-script-ts.outputs.result }} != "John" ] && exit 1
+          [ ${{ steps.test-script-ts.outputs.result }} = "John" ] && echo "Passed 🎉"
 
       - name: Script Kit run test-script sweet
         id: test-script-sweet
